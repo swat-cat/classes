@@ -24,6 +24,7 @@ public class LoginView implements LoginContract.View {
     private EditText loginInput;
     private EditText passwordInput;
     private View confirmBtn;
+    private View forgotPassword;
 
 
     public LoginView(View root) {
@@ -37,6 +38,7 @@ public class LoginView implements LoginContract.View {
         loginInput = root.findViewById(R.id.login);
         passwordInput = root.findViewById(R.id.password);
         confirmBtn = root.findViewById(R.id.confirm_btn);
+        forgotPassword = root.findViewById(R.id.forgot_password);
     }
 
     @Override
@@ -72,6 +74,11 @@ public class LoginView implements LoginContract.View {
     @Override
     public Observable<Object> confirmBtnAction() {
         return RxView.clicks(confirmBtn);
+    }
+
+    @Override
+    public Observable<Object> forgotPasswordAction() {
+        return RxView.clicks(forgotPassword);
     }
 
     @Override

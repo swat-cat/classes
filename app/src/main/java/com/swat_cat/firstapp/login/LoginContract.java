@@ -17,10 +17,14 @@ public interface LoginContract {
         String getPasswordText();
         void setPasswordInputError(@Nullable String error);
         Observable<Object> confirmBtnAction();
+        Observable<Object> forgotPasswordAction();
+
     }
     interface Presenter{
         void start(View view);
         void stop();
         void login();
+        void forgotPassword();
+        void setNavigationCallback(LoginNavigationCallback navigationCallback);
     }
 }

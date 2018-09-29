@@ -1,5 +1,6 @@
 package com.swat_cat.firstapp.login;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -16,9 +17,12 @@ import io.reactivex.disposables.Disposable;
 
 public class LoginPresenter implements LoginContract.Presenter{
 
+    private static final String USER_ID = "USER_ID";
     private LoginContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
+
+    private LoginNavigationCallback navigationCallback;
 
     @Override
     public void start(LoginContract.View view) {
@@ -80,12 +84,33 @@ public class LoginPresenter implements LoginContract.Presenter{
         view.confirmBtnAction().subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                subscriptions.add(d);
             }
 
             @Override
             public void onNext(Object o) {
                 login();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        view.forgotPasswordAction().subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                subscriptions.add(d);
+            }
+
+            @Override
+            public void onNext(Object o) {
+                forgotPassword();
             }
 
             @Override
@@ -129,6 +154,11 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
 
     @Override
+    public void forgotPassword() {
+        navigationCallback.navigateToForgotPassword(null);
+    }
+
+    @Override
     public void login() {
         view.showLoading(true);
         handler.postDelayed(new Runnable() {
@@ -138,5 +168,12 @@ public class LoginPresenter implements LoginContract.Presenter{
             }
         },2000);
         Log.d(LoginPresenter.class.getSimpleName(),"Password: "+view.getPasswordText()+"\n"+"Login: "+view.getLoginText());
+        Bundle args = new Bundle();
+        args.putInt(USER_ID,64);
+        navigationCallback.navigateToFeed(args);
+    }
+
+    public void setNavigationCallback(LoginNavigationCallback navigationCallback) {
+        this.navigationCallback = navigationCallback;
     }
 }
