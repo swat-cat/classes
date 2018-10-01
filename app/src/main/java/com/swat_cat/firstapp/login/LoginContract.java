@@ -18,6 +18,7 @@ public interface LoginContract {
         void setPasswordInputError(@Nullable String error);
         Observable<Object> confirmBtnAction();
         Observable<Object> forgotPasswordAction();
+        void resizeButtonAndChangeMarging();
 
     }
     interface Presenter{

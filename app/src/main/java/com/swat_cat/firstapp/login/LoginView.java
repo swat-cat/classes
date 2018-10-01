@@ -1,9 +1,11 @@
 package com.swat_cat.firstapp.login;
 
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -79,6 +81,15 @@ public class LoginView implements LoginContract.View {
     @Override
     public Observable<Object> forgotPasswordAction() {
         return RxView.clicks(forgotPassword);
+    }
+
+    @Override
+    public void resizeButtonAndChangeMarging() {
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) confirmBtn.getLayoutParams();
+        layoutParams.height = layoutParams.height*2;
+        layoutParams.width = layoutParams.width*2;
+        layoutParams.topMargin = layoutParams.topMargin+150;
+        confirmBtn.setLayoutParams(layoutParams);
     }
 
     @Override
