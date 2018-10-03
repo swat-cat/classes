@@ -31,9 +31,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_example);
+        setContentView(R.layout.activity_list);
         handler = new Handler(Looper.getMainLooper());
-       // handler.postDelayed(this::finishScreen,5000);
         shoppingList = findViewById(R.id.shopping_list);
     }
 

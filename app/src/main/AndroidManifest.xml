@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ShoppingListActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".MyService"/>
     </application>

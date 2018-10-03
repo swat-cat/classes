@@ -5,7 +5,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.LogPrinter;
+import android.widget.Toast;
 
+
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import com.swat_cat.firstapp.base.MessageEvent;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
@@ -21,7 +26,6 @@ public class LoginPresenter implements LoginContract.Presenter{
     private LoginContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
-
     private LoginNavigationCallback navigationCallback;
 
     @Override
@@ -91,6 +95,7 @@ public class LoginPresenter implements LoginContract.Presenter{
             public void onNext(Object o) {
                 //view.resizeButtonAndChangeMarging();
                 login();
+                //view.showMessage("Piddor!!!");
             }
 
             @Override

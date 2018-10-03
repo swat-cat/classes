@@ -19,6 +19,7 @@ public interface LoginContract {
         Observable<Object> confirmBtnAction();
         Observable<Object> forgotPasswordAction();
         void resizeButtonAndChangeMarging();
+        void showMessage(String message);
 
     }
     interface Presenter{

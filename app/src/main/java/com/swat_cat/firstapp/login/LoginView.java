@@ -3,13 +3,19 @@ package com.swat_cat.firstapp.login;
 import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.squareup.otto.Bus;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
+import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
 
 import io.reactivex.Observable;
 
@@ -28,6 +34,7 @@ public class LoginView implements LoginContract.View {
     private View confirmBtn;
     private View forgotPassword;
 
+    private Bus bus;
 
     public LoginView(View root) {
         this.root = root;
@@ -96,5 +103,24 @@ public class LoginView implements LoginContract.View {
     public void showLoading(boolean show) {
         progress.setVisibility(show?View.VISIBLE:View.GONE);
         content.setVisibility(show?View.GONE:View.VISIBLE);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        View view = LayoutInflater.from(root.getContext()).inflate(R.layout.info_dialog,null);
+        TextView text = view.findViewById(R.id.message);
+        text.setText(message);
+        View okButton = view.findViewById(R.id.ok);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bus.post(new HideDialogEvent());
+            }
+        });
+        bus.post(new ShowDialogEvent(view));
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
     }
 }
