@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.login.LoginContract;
 import com.swat_cat.firstapp.login.LoginNavigationCallback;
 import com.swat_cat.firstapp.login.LoginPresenter;
@@ -20,7 +21,7 @@ import com.swat_cat.firstapp.utils.Constants;
 import java.time.Duration;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 

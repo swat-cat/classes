@@ -7,4 +7,6 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="black_semi_transparent">#80000000</color>
+    <color name="dialog_background">#F3F3F3</color>
+    <color name="gray">#C8C8C8</color>
 </resources>
