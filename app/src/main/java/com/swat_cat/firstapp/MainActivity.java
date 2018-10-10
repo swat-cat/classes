@@ -84,6 +84,8 @@ public class MainActivity extends BaseActivity {
         presenter.setNavigationCallback(new LoginNavigationCallback() {
             @Override
             public void navigateToFeed(Bundle args) {
+                Intent intent = new Intent(MainActivity.this, ShoppingListActivity.class);
+                startActivity(intent);
             }
 
             @Override

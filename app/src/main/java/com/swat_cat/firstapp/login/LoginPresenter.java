@@ -166,13 +166,6 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void login() {
-        view.showLoading(true);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.showLoading(false);
-            }
-        },2000);
         Log.d(LoginPresenter.class.getSimpleName(),"Password: "+view.getPasswordText()+"\n"+"Login: "+view.getLoginText());
         Bundle args = new Bundle();
         args.putInt(USER_ID,64);

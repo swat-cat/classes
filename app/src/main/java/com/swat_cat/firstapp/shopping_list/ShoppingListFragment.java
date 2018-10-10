@@ -30,12 +30,12 @@ public class ShoppingListFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        presenter.start(view);
+        //presenter.start(view);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.stop();
+        //presenter.stop();
     }
 }

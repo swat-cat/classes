@@ -31,14 +31,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_forgot_password);
         handler = new Handler(Looper.getMainLooper());
-        shoppingList = findViewById(R.id.shopping_list);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        //makeList();
+    }
+
+    private void makeList() {
         List<ShoppingItem> list = mockShoppingList();
         LinearLayoutManager llm = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         adapter = new ShoppingListAdapter(list, new ItemBoughtCallback() {
