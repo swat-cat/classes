@@ -50,4 +50,9 @@ public class ShoppingListView implements ShoppingListContract.View{
     public Observable<Object> addItemAction() {
         return RxView.clicks(addButton);
     }
+
+    @Override
+    public void updateList() {
+
+    }
 }

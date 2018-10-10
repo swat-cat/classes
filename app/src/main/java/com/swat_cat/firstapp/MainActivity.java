@@ -1,9 +1,13 @@
 package com.swat_cat.firstapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +45,20 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         root = findViewById(R.id.root);
         view = new LoginView(root);
+        if (getIntent().hasExtra("TEST")){
+            String text = getIntent().getStringExtra("TEST");
+            if (text!=null && !text.isEmpty()){
+                view.setLoginText(text);
+            }
+        }
+        if (savedInstanceState!=null && savedInstanceState.containsKey("email")){
+            String email = savedInstanceState.getString("email");
+            if (email!=null) {
+                view.setLoginText(email);
+                ((LoginView) view).email = email;
+                ((LoginView) view).initView();
+            }
+        }
         presenter = new LoginPresenter();
         intentFilter = new IntentFilter();
         intentFilter.addAction(Constants.BROADCAST_STRING_ACTION);
@@ -72,6 +90,11 @@ public class MainActivity extends BaseActivity {
             public void navigateToForgotPassword(Bundle args) {
                 Intent intent = new Intent(MainActivity.this,ForgotPasswordActivity.class);
                 startActivityForResult(intent, Constants.LOGIN_RESULT);
+                /*Intent intent = new Intent(Intent.ACTION_SEND);
+
+                intent.putExtra(Intent.EXTRA_TEXT,"My awesome post");
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent,"Share"));*/
             }
         });
         registerReceiver(receiver,intentFilter);
@@ -96,5 +119,11 @@ public class MainActivity extends BaseActivity {
         presenter.stop();
         unregisterReceiver(receiver);
         getBus().unregister(presenter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("email",presenter.getEmail());
     }
 }

@@ -79,7 +79,7 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
 
     @Override
     public void addItem() {
-        
+
     }
 
     @Override

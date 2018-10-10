@@ -20,6 +20,7 @@ public interface LoginContract {
         Observable<Object> forgotPasswordAction();
         void resizeButtonAndChangeMarging();
         void showMessage(String message);
+        void setLoginText(String text);
 
     }
     interface Presenter{
@@ -28,5 +29,6 @@ public interface LoginContract {
         void login();
         void forgotPassword();
         void setNavigationCallback(LoginNavigationCallback navigationCallback);
+        String getEmail();
     }
 }

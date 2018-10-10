@@ -33,6 +33,8 @@ public class LoginView implements LoginContract.View {
     private EditText passwordInput;
     private View confirmBtn;
     private View forgotPassword;
+    private TextView testText;
+    public String email;
 
     private Bus bus;
 
@@ -41,13 +43,22 @@ public class LoginView implements LoginContract.View {
         initView();
     }
 
-    private void initView() {
+    public void initView() {
         content = root.findViewById(R.id.content);
         progress = root.findViewById(R.id.progress);
         loginInput = root.findViewById(R.id.login);
         passwordInput = root.findViewById(R.id.password);
         confirmBtn = root.findViewById(R.id.confirm_btn);
         forgotPassword = root.findViewById(R.id.forgot_password);
+        testText = root.findViewById(R.id.test_text);
+        if (email!=null) {
+            testText.setText(email);
+        }
+    }
+
+    @Override
+    public void setLoginText(String text) {
+        loginInput.setText(text);
     }
 
     @Override

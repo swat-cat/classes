@@ -182,4 +182,9 @@ public class LoginPresenter implements LoginContract.Presenter{
     public void setNavigationCallback(LoginNavigationCallback navigationCallback) {
         this.navigationCallback = navigationCallback;
     }
+
+    @Override
+    public String getEmail() {
+        return view.getLoginText();
+    }
 }
