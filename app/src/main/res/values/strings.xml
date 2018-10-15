@@ -2,4 +2,7 @@
     <string name="app_name" translatable="false">firstApp</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="save">save</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
 </resources>
