@@ -7,16 +7,15 @@ import android.view.ViewGroup;
 
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseFragment;
-import com.swat_cat.firstapp.models.ShoppingItem;
 
 public class ShoppingItemFragment extends BaseFragment {
 
-    ShoppingItemContract.Presenter presenter;
-    ShoppingItemContract.View view;
+    private ShoppingItemContract.View view;
+    private ShoppingItemContract.Presenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.shopping_item, container, false);
+        View root = inflater.inflate(R.layout.fragment_shopping_item,container,false);
         return root;
     }
 }

@@ -17,7 +17,6 @@ public interface ShoppingItemContract {
         void setDescriptionInputError(@Nullable String error);
         Observable<Object> saveBtnAction();
     }
-
     interface Presenter{
         void start(View view);
         void stop();
