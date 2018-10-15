@@ -26,14 +26,15 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
     private ShoppingListContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
+    private ShoppingListContract.Navigator navigator;
 
-    public ShoppingListPresenter(ShoppingListContract.View view) {
-        this.view = view;
+    public ShoppingListPresenter() {
         handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public void start(ShoppingListContract.View view) {
+        this.view = view;
         subscriptions = new CompositeDisposable();
         List<ShoppingItem> items = Paper.book().read(Constants.ITEMS,new ArrayList<>());
         view.setShoppingList(items, new ItemBoughtCallback() {
@@ -79,11 +80,17 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
 
     @Override
     public void addItem() {
-
+        if (navigator!=null) {
+            navigator.navigateToAddItem();
+        }
     }
 
     @Override
     public void setView(ShoppingListContract.View view) {
         this.view = view;
+    }
+
+    public void setNavigator(ShoppingListContract.Navigator navigator) {
+        this.navigator = navigator;
     }
 }

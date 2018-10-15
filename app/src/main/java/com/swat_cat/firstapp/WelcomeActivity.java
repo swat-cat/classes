@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import io.paperdb.Paper;
+
 public class WelcomeActivity extends AppCompatActivity {
 
 
@@ -19,6 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Paper.init(this);
         setContentView(R.layout.activity_welcome);
         shoppingCart = (ImageView) findViewById(R.id.shopping_cart);
 

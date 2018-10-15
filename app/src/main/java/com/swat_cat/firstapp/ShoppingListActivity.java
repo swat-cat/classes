@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.shopping_list.ShoppingListFragment;
@@ -22,7 +23,21 @@ public class ShoppingListActivity extends BaseActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         Fragment fragment = new ShoppingListFragment();
-        transaction.add(R.id.content,fragment);
+        transaction.add(R.id.content, fragment, fragment.getClass().getSimpleName());
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            Log.i(TAG, "popping backstack");
+
+            FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1);
+            String fragmentName = backEntry.getName();
+            fragmentManager.popBackStackImmediate(fragmentName, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            finish();
+        }
     }
 }

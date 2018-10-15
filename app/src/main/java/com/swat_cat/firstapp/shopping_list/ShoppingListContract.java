@@ -23,5 +23,10 @@ public interface ShoppingListContract {
         void stop();
         void addItem();
         void setView(View view);
+        void setNavigator(Navigator navigator);
+    }
+
+    interface Navigator{
+        void navigateToAddItem();
     }
 }

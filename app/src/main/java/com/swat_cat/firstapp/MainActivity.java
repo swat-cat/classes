@@ -46,7 +46,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Paper.init(this);
         setContentView(R.layout.activity_main);
         root = findViewById(R.id.root);
         view = new  LoginView(root);
