@@ -53,8 +53,7 @@
 
 
     <FrameLayout
-        android:id="@+id/confirm_btn"
-
+        android:id="@+id/save_btn"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginEnd="56dp"
@@ -63,7 +62,6 @@
         android:background="@drawable/confirm_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent">
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
