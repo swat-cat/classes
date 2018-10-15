@@ -1,13 +1,17 @@
 package com.swat_cat.firstapp;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +27,7 @@ import com.swat_cat.firstapp.login.LoginView;
 import com.swat_cat.firstapp.models.LoginData;
 import com.swat_cat.firstapp.utils.Constants;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
 
@@ -44,7 +49,7 @@ public class MainActivity extends BaseActivity {
         Paper.init(this);
         setContentView(R.layout.activity_main);
         root = findViewById(R.id.root);
-        view = new LoginView(root);
+        view = new  LoginView(root);
         if (getIntent().hasExtra("TEST")){
             String text = getIntent().getStringExtra("TEST");
             if (text!=null && !text.isEmpty()){
@@ -92,11 +97,30 @@ public class MainActivity extends BaseActivity {
             public void navigateToForgotPassword(Bundle args) {
                 Intent intent = new Intent(MainActivity.this,ForgotPasswordActivity.class);
                 startActivityForResult(intent, Constants.LOGIN_RESULT);
-                /*Intent intent = new Intent(Intent.ACTION_SEND);
+               /* Intent intent = new Intent(Intent.ACTION_SEND);
 
                 intent.putExtra(Intent.EXTRA_TEXT,"My awesome post");
                 intent.setType("text/plain");
                 startActivity(Intent.createChooser(intent,"Share"));*/
+               /* File imagePath = new File(MainActivity.this.getFilesDir(), "pdf");
+                File newFile = new File(imagePath, "default_doc.pdf");
+                // создаём новое намерение
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+
+// устанавливаем флаг для того, чтобы дать внешнему приложению пользоваться нашим FileProvider
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+// генерируем URI, я определил полномочие как ID приложения в манифесте, последний параметр это файл, который я хочу открыть
+                Uri uri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID, newFile);
+
+// я открываю PDF-файл, поэтому я даю ему действительный тип MIME
+                intent.setDataAndType(uri, "application/pdf");
+
+// подтвердите, что устройство может открыть этот файл!
+                PackageManager pm = MainActivity.this.getPackageManager();
+                if (intent.resolveActivity(pm) != null) {
+                    startActivity(intent);
+                }*/
             }
         });
         registerReceiver(receiver,intentFilter);
@@ -127,5 +151,10 @@ public class MainActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("email",presenter.getEmail());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
