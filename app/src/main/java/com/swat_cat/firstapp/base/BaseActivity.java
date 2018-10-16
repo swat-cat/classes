@@ -3,12 +3,15 @@ package com.swat_cat.firstapp.base;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.pavlospt.rxfile.RxFile;
 import com.squareup.otto.Bus;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.dialogs.DialogShower;
@@ -47,7 +51,10 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import rx.Scheduler;
+import rx.Subscriber;
 import timber.log.Timber;
 
 /**
@@ -119,6 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void loadFromCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
+
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
@@ -133,6 +141,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         photoFile);
+                if ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP ) {
+                    takePictureIntent.setClipData( ClipData.newRawUri( "", photoURI ) );
+                    takePictureIntent.addFlags( Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_READ_URI_PERMISSION );
+                }
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
@@ -249,43 +261,50 @@ public abstract class BaseActivity extends AppCompatActivity {
             }else if (requestCode == REQUEST_LOAD_PHOTO){
                 final Uri imageUri = data.getData();
                 if (imageUri != null) {
-                    File file = new File(getRealPathFromURI_API19(this,imageUri));
-                    getBus().post(new ImageEvent(file));
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                           RxFile.createFileFromUri(BaseActivity.this,imageUri)
+                                    .subscribe(new Subscriber<File>() {
+                                        @Override
+                                        public void onCompleted() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable e) {
+
+                                        }
+
+                                        @Override
+                                        public void onNext(File file) {
+                                            getBus().post(new ImageEvent(file));
+                                        }
+                                    });
+
+                        }
+                    },2000);
                 }
             }
         }
     }
 
     public static String getRealPathFromURI_API19(Context context, Uri uri) {
-        String filePath = "";
-        if (uri.getHost().contains("com.android.providers.media")) {
-            // Image pick from recent
-            String wholeID = DocumentsContract.getDocumentId(uri);
+        String[] proj = { MediaStore.Images.Media.DATA };
+        String result = null;
 
-            // Split at colon, use second item in the array
-            String id = wholeID.split(":")[1];
+        CursorLoader cursorLoader = new CursorLoader(
+                context,
+                uri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
 
-            String[] column = {MediaStore.Images.Media.DATA};
-
-            // where id is equal to
-            String sel = MediaStore.Images.Media._ID + "=?";
-
-            Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    column, sel, new String[]{id}, null);
-
-            if (cursor != null) {
-                int columnIndex = cursor.getColumnIndex(column[0]);
-
-                if (cursor.moveToFirst()) {
-                    filePath = cursor.getString(columnIndex);
-                }
-                cursor.close();
-            }
-            return filePath;
-        } else {
-            // image pick from gallery
-            return getRealPathFromURI_BelowAPI11(context, uri);
+        if(cursor != null){
+            int column_index =
+                    cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            result = cursor.getString(column_index);
         }
+        return result;
     }
     public static String getRealPathFromURI_BelowAPI11(Context context, Uri contentUri){
         String[] proj = { MediaStore.Images.Media.DATA };
