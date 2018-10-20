@@ -1,14 +1,10 @@
 package com.swat_cat.firstapp.login;
 
 import android.support.constraint.ConstraintLayout;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -44,7 +40,7 @@ public class LoginView implements LoginContract.View {
     }
 
     public void initView() {
-        content = root.findViewById(R.id.content);
+        content = root.findViewById(R.id.content_frame);
         progress = root.findViewById(R.id.progress);
         loginInput = root.findViewById(R.id.login);
         passwordInput = root.findViewById(R.id.password);

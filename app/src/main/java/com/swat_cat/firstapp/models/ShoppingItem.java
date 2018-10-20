@@ -5,16 +5,16 @@ package com.swat_cat.firstapp.models;
  */
 
 public class ShoppingItem {
-    private int image;
+    private String image;
     private String title;
     private String subTitle;
     private boolean bought;
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

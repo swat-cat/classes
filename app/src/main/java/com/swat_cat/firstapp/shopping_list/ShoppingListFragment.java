@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.base.BaseFragment;
 import com.swat_cat.firstapp.shopping_list.shopping_item.ShoppingItemFragment;
 
@@ -21,11 +22,13 @@ public class ShoppingListFragment extends BaseFragment {
 
     private ShoppingListContract.View view;
     private ShoppingListContract.Presenter presenter;
+    private BaseActivity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list_example,container,false);
+        activity = (BaseActivity)getActivity();
         view = new ShoppingListView(root);
         presenter = new ShoppingListPresenter();
         return root;
@@ -34,15 +37,7 @@ public class ShoppingListFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        presenter.setNavigator(()->{
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up);
-            Fragment fragment = new ShoppingItemFragment();
-            transaction.replace(R.id.content,fragment);
-            transaction.addToBackStack(fragment.getClass().getSimpleName());
-            transaction.commit();
-        });
+        presenter.setNavigator(activity.getNavigator());
         presenter.start(view);
     }
 

@@ -41,46 +41,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         //makeList();
     }
 
-    private void makeList() {
-        List<ShoppingItem> list = mockShoppingList();
-        LinearLayoutManager llm = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        adapter = new ShoppingListAdapter(list, new ItemBoughtCallback() {
-            @Override
-            public void itemBought(ShoppingItem item, boolean bought) {
-                item.setBought(bought);
-                Toast.makeText(ForgotPasswordActivity.this,item.getTitle()+" bought: "+item.isBought(),Toast.LENGTH_SHORT).show();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();//TODO
-                    }
-                },50);
-            }
-        });
-        shoppingList.setLayoutManager(llm);
-        shoppingList.setAdapter(adapter);
-    }
-
-    private List<ShoppingItem> mockShoppingList() {
-        List<ShoppingItem> itemList = new ArrayList<>();
-        ShoppingItem item1 = new ShoppingItem();
-        item1.setTitle("Milk");
-        item1.setSubTitle("milk 2,5% of fat");
-        item1.setImage(R.drawable.coriander);
-        ShoppingItem item2 = new ShoppingItem();
-        item2.setTitle("Bulb");
-        item2.setSubTitle("energy saving, 20 vat");
-        item2.setImage(R.drawable.pork);
-        ShoppingItem item3 = new ShoppingItem();
-        item3.setTitle("teeth brush");
-        item3.setSubTitle("Oral B");
-        item3.setImage(R.drawable.chicken_broth_170);
-        itemList.add(item1);
-        itemList.add(item2);
-        itemList.add(item3);
-        return itemList;
-    }
-
     private void finishScreen() {
         Intent intent = new Intent();
         intent.putExtra(Constants.TOKEN,"my token");

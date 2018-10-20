@@ -12,22 +12,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.services.navigation.Screen;
+import com.swat_cat.firstapp.services.navigation.ScreenType;
+
 import io.paperdb.Paper;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
 
     ImageView shoppingCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Paper.init(this);
         setContentView(R.layout.activity_welcome);
         shoppingCart = (ImageView) findViewById(R.id.shopping_cart);
 
-        final Intent i = new Intent(this,MainActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-       /* i.putExtra("TEST","TEST_TEST");*/
 
         ObjectAnimator scaleAnimX = ObjectAnimator.ofFloat(shoppingCart,"scaleX",0f, 1f);
         ObjectAnimator scaleAnimY = ObjectAnimator.ofFloat(shoppingCart,"scaleY",0f, 1f);
@@ -57,8 +57,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
-                        startActivity(i);
+                        getNavigator().navigateTo(Screen.AUTH,ScreenType.ACTIVITY);
                     }
                 },1000);
             }

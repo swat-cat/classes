@@ -1,5 +1,7 @@
 package com.swat_cat.firstapp.login;
 
+import com.swat_cat.firstapp.services.Navigator;
+
 import io.reactivex.Observable;
 import io.reactivex.annotations.Nullable;
 
@@ -28,7 +30,7 @@ public interface LoginContract {
         void stop();
         void login();
         void forgotPassword();
-        void setNavigationCallback(LoginNavigationCallback navigationCallback);
+        void setNavigator(Navigator navigator);
         String getEmail();
     }
 }

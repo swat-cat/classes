@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.swat_cat.firstapp.base.MessageEvent;
+import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.Screen;
+import com.swat_cat.firstapp.services.navigation.ScreenType;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,7 +29,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     private LoginContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
-    private LoginNavigationCallback navigationCallback;
+    private Navigator navigator;
 
     @Override
     public void start(LoginContract.View view) {
@@ -161,7 +164,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void forgotPassword() {
-        navigationCallback.navigateToForgotPassword(null);
+        navigator.navigateTo(Screen.FORGOT_PASS,ScreenType.ACTIVITY);
     }
 
     @Override
@@ -169,15 +172,16 @@ public class LoginPresenter implements LoginContract.Presenter{
         Log.d(LoginPresenter.class.getSimpleName(),"Password: "+view.getPasswordText()+"\n"+"Login: "+view.getLoginText());
         Bundle args = new Bundle();
         args.putInt(USER_ID,64);
-        navigationCallback.navigateToFeed(args);
-    }
-
-    public void setNavigationCallback(LoginNavigationCallback navigationCallback) {
-        this.navigationCallback = navigationCallback;
+        navigator.navigateTo(Screen.SHOPPING,ScreenType.ACTIVITY,args);
     }
 
     @Override
     public String getEmail() {
         return view.getLoginText();
+    }
+
+    @Override
+    public void setNavigator(Navigator navigator) {
+        this.navigator = navigator;
     }
 }

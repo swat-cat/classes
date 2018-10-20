@@ -7,6 +7,9 @@ import android.widget.Toast;
 import com.swat_cat.firstapp.ForgotPasswordActivity;
 import com.swat_cat.firstapp.list_example.ItemBoughtCallback;
 import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.Screen;
+import com.swat_cat.firstapp.services.navigation.ScreenType;
 import com.swat_cat.firstapp.utils.Constants;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
     private ShoppingListContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
-    private ShoppingListContract.Navigator navigator;
+    private Navigator navigator;
 
     public ShoppingListPresenter() {
         handler = new Handler(Looper.getMainLooper());
@@ -81,7 +84,7 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
     @Override
     public void addItem() {
         if (navigator!=null) {
-            navigator.navigateToAddItem();
+            navigator.navigateTo(Screen.ITEM_DETAILS,ScreenType.FRAGMENT);
         }
     }
 
@@ -90,7 +93,7 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
         this.view = view;
     }
 
-    public void setNavigator(ShoppingListContract.Navigator navigator) {
+    public void setNavigator(Navigator navigator) {
         this.navigator = navigator;
     }
 }

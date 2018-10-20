@@ -12,9 +12,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.models.ShoppingItem;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -45,7 +47,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         }
         holder.title.setText(item.getTitle());
         holder.subTitle.setText(item.getSubTitle());
-        holder.image.setImageDrawable(AppCompatResources.getDrawable(holder.itemView.getContext(),item.getImage()));
+        if (item.getImage() != null && !item.getImage().isEmpty()) {
+            File f = new File(item.getImage());
+            Picasso.get()
+                    .load(f)
+                    .into(holder.image);
+        }
         holder.checkBox.setChecked(item.isBought());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

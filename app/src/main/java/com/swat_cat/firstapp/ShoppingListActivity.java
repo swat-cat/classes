@@ -23,7 +23,7 @@ public class ShoppingListActivity extends BaseActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         Fragment fragment = new ShoppingListFragment();
-        transaction.add(R.id.content, fragment, fragment.getClass().getSimpleName());
+        transaction.add(R.id.content_frame, fragment, fragment.getClass().getSimpleName());
         transaction.commit();
     }
 

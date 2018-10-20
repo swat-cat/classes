@@ -2,9 +2,11 @@ package com.swat_cat.firstapp.shopping_list.shopping_item;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.base.App;
 import com.swat_cat.firstapp.base.ImageEvent;
 import com.swat_cat.firstapp.models.ShoppingItem;
 import com.swat_cat.firstapp.utils.Constants;
@@ -22,11 +24,11 @@ import io.reactivex.disposables.Disposable;
 public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
     private ShoppingItemContract.View view;
-    private File itemImageFile;
     private ShoppingItem item;
     private CompositeDisposable subscriptions;
     private LoadImageCallback loadImageCallback;
     private File itemFile;
+    private List<ShoppingItem> items;
 
     public ShoppingItemPresenter() {
         item = new ShoppingItem();
@@ -38,6 +40,7 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
         subscriptions = new CompositeDisposable();
         item = new ShoppingItem();
         initActions();
+        items = Paper.book().read(Constants.ITEMS,new ArrayList<>());
     }
 
     private void initActions() {
@@ -169,17 +172,20 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
     @Override
     public void saveItem() {
-        List<ShoppingItem> items = new ArrayList<>();
         item.setTitle(view.getTitleText());
         item.setSubTitle(view.getDescriptionText());
-        //item.setImage();
+        if (itemFile != null) {
+            item.setImage(itemFile.getAbsolutePath());
+        }
         items.add(item);
+
        // Bitmap myBitmap = BitmapFactory.decodeFile(itemFile.getAbsolutePath());
 
-        //Paper.book().write(Constants.ITEMS, items);
+        Paper.book().write(Constants.ITEMS, items);
        /* if(itemFile == null) {
             item.setImage(null);
         }*/
+        Toast.makeText(App.getInstance().getApplicationContext(),"Press Back to check",Toast.LENGTH_SHORT).show();
     }
 
     public void setLoadImageCallback(LoadImageCallback loadImageCallback) {

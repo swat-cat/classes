@@ -40,6 +40,8 @@ import com.swat_cat.firstapp.base.dialogs.DialogShower;
 import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
 import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
 import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
+import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationManager;
 import com.swat_cat.firstapp.shopping_list.shopping_item.LoadImageType;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -72,6 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     static final int REQUEST_LOAD_PHOTO = 93;
     private String photoPath = "";
     final RxPermissions rxPermissions = new RxPermissions(this);
+    private Navigator navigator;
 
     @Override
     protected void onStart() {
@@ -106,6 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         handler = new Handler(Looper.getMainLooper());
         bus = new Bus();
         dialogShower = new DialogShower(this);
+        navigator = new ScreenNavigationManager(this);
         bus.register(dialogShower);
     }
 
@@ -329,5 +333,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         getBus().post(new DialogWasDissmisedEvent());
     }
 
+    public Navigator getNavigator() {
+        return navigator;
+    }
 }
 
