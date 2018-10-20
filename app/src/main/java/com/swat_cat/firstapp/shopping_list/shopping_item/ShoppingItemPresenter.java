@@ -1,12 +1,20 @@
 package com.swat_cat.firstapp.shopping_list.shopping_item;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.squareup.otto.Subscribe;
+import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.ImageEvent;
 import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.utils.Constants;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -28,11 +36,12 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
     public void start(ShoppingItemContract.View view) {
         this.view = view;
         subscriptions = new CompositeDisposable();
+        item = new ShoppingItem();
         initActions();
     }
 
     private void initActions() {
-        view.setSaveButttonEnabled(false);
+        view.setSaveButtonEnabled(false);
         view.titleInputChanged().subscribe(new Observer<CharSequence>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -41,7 +50,7 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
             @Override
             public void onNext(CharSequence charSequence) {
-               view.setSaveButttonEnabled(isSaveEnabled());
+               view.setSaveButtonEnabled(isSaveEnabled());
             }
 
             @Override
@@ -62,7 +71,7 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
             @Override
             public void onNext(CharSequence charSequence) {
-                view.setSaveButttonEnabled(isSaveEnabled());
+                view.setSaveButtonEnabled(isSaveEnabled());
             }
 
             @Override
@@ -84,6 +93,27 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
             @Override
             public void onNext(Object o) {
                 requestImageChoice();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        view.saveBtnAction().subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                subscriptions.add(d);
+            }
+
+            @Override
+            public void onNext(Object o) {
+                saveItem();
             }
 
             @Override
@@ -127,8 +157,10 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
         return !view.getTitleText().isEmpty() && !view.getDescriptionText().isEmpty();
     }
 
+
     @Override
     public void stop() {
+
         if (subscriptions!=null){
             subscriptions.dispose();
             subscriptions = null;
@@ -137,7 +169,17 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
     @Override
     public void saveItem() {
+        List<ShoppingItem> items = new ArrayList<>();
+        item.setTitle(view.getTitleText());
+        item.setSubTitle(view.getDescriptionText());
+        //item.setImage();
+        items.add(item);
+       // Bitmap myBitmap = BitmapFactory.decodeFile(itemFile.getAbsolutePath());
 
+        //Paper.book().write(Constants.ITEMS, items);
+       /* if(itemFile == null) {
+            item.setImage(null);
+        }*/
     }
 
     public void setLoadImageCallback(LoadImageCallback loadImageCallback) {
@@ -150,3 +192,4 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
         view.setItemImage(itemFile);
     }
 }
+

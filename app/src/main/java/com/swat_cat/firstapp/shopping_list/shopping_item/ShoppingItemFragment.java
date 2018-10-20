@@ -1,6 +1,9 @@
 package com.swat_cat.firstapp.shopping_list.shopping_item;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.base.BaseFragment;
+import com.swat_cat.firstapp.shopping_list.ShoppingListFragment;
 
 public class ShoppingItemFragment extends BaseFragment {
 
@@ -38,11 +42,14 @@ public class ShoppingItemFragment extends BaseFragment {
     public void onStop() {
         super.onStop();
         presenter.stop();
+
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         activity.getBus().unregister(presenter);
+
     }
 }

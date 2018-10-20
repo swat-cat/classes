@@ -17,9 +17,10 @@ public interface ShoppingItemContract {
         String getTitleText();
         Observable<CharSequence> descriptionInputChanged();
         String getDescriptionText();
-        void setSaveButttonEnabled(boolean enabled);
+        void setSaveButtonEnabled(boolean enabled);
         Observable<Object> saveBtnAction();
         void showImageChoiceModal(boolean show, ImagePickChoiceView.ImagePickViewCallback callback);
+
     }
     interface Presenter{
         void setLoadImageCallback(LoadImageCallback loadImageCallback);

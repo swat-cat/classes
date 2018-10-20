@@ -252,16 +252,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == REQUEST_TAKE_PHOTO){
                 File file = new File(photoPath);
-                new Handler().postDelayed(new Runnable() {
+                new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         getBus().post(new ImageEvent(file));
                     }
-                },1000);
+                });
             }else if (requestCode == REQUEST_LOAD_PHOTO){
                 final Uri imageUri = data.getData();
                 if (imageUri != null) {
-                    new Handler().postDelayed(new Runnable() {
+                    new Handler().post(new Runnable() {
                         @Override
                         public void run() {
                            RxFile.createFileFromUri(BaseActivity.this,imageUri)
@@ -283,7 +283,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                                     });
 
                         }
-                    },2000);
+                    });
                 }
             }
         }
