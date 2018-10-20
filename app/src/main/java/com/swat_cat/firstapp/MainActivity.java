@@ -85,6 +85,7 @@ public class MainActivity extends BaseActivity {
         getBus().register(presenter);
         ((LoginView)view).setBus(getBus());
         presenter.start(view);
+        //Paper.book().delete(Constants.ITEMS);
         presenter.setNavigationCallback(new LoginNavigationCallback() {
             @Override
             public void navigateToFeed(Bundle args) {

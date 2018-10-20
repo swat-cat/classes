@@ -37,6 +37,7 @@ public class ShoppingListFragment extends BaseFragment {
         presenter.setNavigator(()->{
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up);
             Fragment fragment = new ShoppingItemFragment();
             transaction.replace(R.id.content,fragment);
             transaction.addToBackStack(fragment.getClass().getSimpleName());

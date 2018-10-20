@@ -30,6 +30,7 @@ public class ShoppingItemView implements ShoppingItemContract.View {
         initView();
     }
 
+
     public void initView(){
         itemImage = root.findViewById(R.id.item_image);
         titleInput = root.findViewById(R.id.title);
@@ -79,7 +80,7 @@ public class ShoppingItemView implements ShoppingItemContract.View {
     }
 
     @Override
-    public void setSaveButttonEnabled(boolean enabled) {
+    public void setSaveButtonEnabled(boolean enabled) {
         saveBtn.setEnabled(enabled);
     }
 
