@@ -24,7 +24,7 @@ public class ShoppingItemFragment extends BaseFragment {
         View root = inflater.inflate(R.layout.fragment_shopping_item,container,false);
         activity = ((BaseActivity) getActivity());
         view = new ShoppingItemView(root);
-        presenter = new ShoppingItemPresenter();
+        presenter = new ShoppingItemPresenter(activity.getNavigationBackManager());
         activity.getBus().register(presenter);
         return root;
     }

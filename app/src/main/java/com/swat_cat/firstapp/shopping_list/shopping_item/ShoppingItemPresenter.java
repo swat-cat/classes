@@ -9,6 +9,7 @@ import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.App;
 import com.swat_cat.firstapp.base.ImageEvent;
 import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.utils.Constants;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
@@ -29,9 +30,11 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
     private LoadImageCallback loadImageCallback;
     private File itemFile;
     private List<ShoppingItem> items;
+    private BackNavigator backNavigator;
 
-    public ShoppingItemPresenter() {
+    public ShoppingItemPresenter(BackNavigator backNavigator) {
         item = new ShoppingItem();
+        this.backNavigator = backNavigator;
     }
 
     @Override
@@ -118,6 +121,27 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
             @Override
             public void onNext(Object o) {
                 saveItem();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        view.backAction().subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                subscriptions.add(d);
+            }
+
+            @Override
+            public void onNext(Object o) {
+                backNavigator.navigateBack();
             }
 
             @Override
