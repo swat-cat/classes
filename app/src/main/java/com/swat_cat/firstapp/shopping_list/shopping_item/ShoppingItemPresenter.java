@@ -39,8 +39,9 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
         this.view = view;
         subscriptions = new CompositeDisposable();
         item = new ShoppingItem();
-        initActions();
         items = Paper.book().read(Constants.ITEMS,new ArrayList<>());
+        initActions();
+
     }
 
     private void initActions() {
@@ -173,13 +174,16 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
     @Override
     public void saveItem() {
         item.setTitle(view.getTitleText());
-        item.setSubTitle(view.getDescriptionText());
+
         if (itemFile != null) {
             item.setImage(itemFile.getAbsolutePath());
         }
+        // set position to notify adapter what item changed
+         item.setPosition(items.size());
+
+        item.setSubTitle(view.getDescriptionText()+ item.getPosition());
         items.add(item);
 
-       // Bitmap myBitmap = BitmapFactory.decodeFile(itemFile.getAbsolutePath());
 
         Paper.book().write(Constants.ITEMS, items);
        /* if(itemFile == null) {

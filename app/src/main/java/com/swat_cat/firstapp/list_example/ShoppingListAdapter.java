@@ -41,25 +41,35 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ShoppingItem item = items.get(position);
-        if (item.isBought()){
-            holder.title.setTextColor(Color.RED);
-        }
-        holder.title.setText(item.getTitle());
-        holder.subTitle.setText(item.getSubTitle());
-        if (item.getImage() != null && !item.getImage().isEmpty()) {
-            File f = new File(item.getImage());
-            Picasso.get()
-                    .load(f)
-                    .into(holder.image);
-        }
-        holder.checkBox.setChecked(item.isBought());
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                callback.itemBought(item, isChecked);
+
+
+            ShoppingItem item = items.get(position);
+
+
+            if (item.isBought()) {
+                holder.title.setTextColor(Color.RED);
+            } else {
+                holder.title.setTextColor(Color.BLACK);
             }
-        });
+
+            holder.title.setText(item.getTitle());
+            holder.subTitle.setText(item.getSubTitle());
+            if (item.getImage() != null && !item.getImage().isEmpty()) {
+                File f = new File(item.getImage());
+                Picasso.get()
+                        .load(f)
+                        .resize(100, 100)
+                        .centerCrop()
+                        .into(holder.image);
+            }
+            holder.checkBox.setChecked(item.isBought());
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    callback.itemBought(item, isChecked,position);
+                }
+            });
+
     }
 
     @Override

@@ -42,12 +42,12 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
         List<ShoppingItem> items = Paper.book().read(Constants.ITEMS,new ArrayList<>());
         view.setShoppingList(items, new ItemBoughtCallback() {
             @Override
-            public void itemBought(ShoppingItem item, boolean bought) {
+            public void itemBought(ShoppingItem item, boolean bought, int position) {
                 item.setBought(bought);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        view.updateList();
+                        view.updateList(position, item);
                     }
                 },50);
             }

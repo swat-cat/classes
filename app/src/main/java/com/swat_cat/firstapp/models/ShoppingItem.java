@@ -9,6 +9,15 @@ public class ShoppingItem {
     private String title;
     private String subTitle;
     private boolean bought;
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public String getImage() {
         return image;

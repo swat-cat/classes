@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 public interface ShoppingListContract {
     interface View{
         void setShoppingList(List<ShoppingItem> items, ItemBoughtCallback callback);
-        void updateList();
+        void updateList(int i, ShoppingItem item);
         Observable<Object> addItemAction();
     }
     interface Presenter{

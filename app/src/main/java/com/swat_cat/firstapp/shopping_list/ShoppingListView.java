@@ -52,7 +52,10 @@ public class ShoppingListView implements ShoppingListContract.View{
     }
 
     @Override
-    public void updateList() {
+    public void updateList(int i, ShoppingItem item) {
 
+
+        adapter.notifyItemChanged(i,item);
+        //adapter.notifyDataSetChanged();
     }
 }

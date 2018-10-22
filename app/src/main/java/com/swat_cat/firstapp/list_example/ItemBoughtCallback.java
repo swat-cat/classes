@@ -7,5 +7,5 @@ import com.swat_cat.firstapp.models.ShoppingItem;
  */
 
 public interface ItemBoughtCallback {
-    void itemBought(ShoppingItem item, boolean bought);
+    void itemBought(ShoppingItem item, boolean bought, int position);
 }

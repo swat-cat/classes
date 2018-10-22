@@ -79,12 +79,14 @@ public class ScreenNavigationManager implements Navigator {
 
     //Fragments
     private void navigateToItemDetails(Bundle args) {
-        switchFragmentScreen(Screen.ITEM_DETAILS,args,true,true);
+        switchFragmentScreen(Screen.ITEM_DETAILS,args,ScreenAnimType.TOP_TO_BOTTOM_TYPE,true);
     }
 
     private void navigateToShoppingList(Bundle args) {
-        switchFragmentScreen(Screen.SHOPPING_LIST,args,true,false);
+        switchFragmentScreen(Screen.SHOPPING_LIST,args,ScreenAnimType.NONE_TYPE,false);
     }
+
+
 
     //Activities
     private void navigateToShopping(Bundle args) {
@@ -157,35 +159,67 @@ public class ScreenNavigationManager implements Navigator {
         }
     }
 
-    private void switchFragmentScreen(Screen type, Bundle bundle, boolean animate, boolean addToBackStack) {
+    private void switchFragmentScreen(Screen type, Bundle bundle,ScreenAnimType animate, boolean addToBackStack) {
         if (isSameFragmentAlreadyPlaced(type)) {
             return;
         }
 
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction tran = fragmentManager.beginTransaction();
-        if (animate) {
-            tran.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        }
+
+
+        setAnimationForFragment(ScreenAnimType.BOTTOM_TO_TOP_TYPE, tran);
+
+
 
         Fragment fragment = fragmentFactory.getFragmentByType(type);
         if (bundle != null && !bundle.isEmpty()) {
             fragment.setArguments(bundle);
         }
         if (addToBackStack) {
-            if (animate) {
+           /* if (animate) {
                 tran.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,android.R.anim.fade_in, android.R.anim.fade_out);
-            }
+            }*/
             tran.replace(R.id.content_frame, fragment, fragment.getClass().getSimpleName());
             tran.addToBackStack(fragment.getClass().getSimpleName());
         } else {
-            if (animate) {
-                tran.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
+
+            setAnimationForFragment(ScreenAnimType.FADE_TYPE,tran);
+
             tran.replace(R.id.content_frame, fragment);
         }
         tran.commit();
     }
+
+    private FragmentTransaction setAnimationForFragment(ScreenAnimType animate,FragmentTransaction tran){
+
+        switch (animate){
+            case NONE_TYPE:
+                tran.setCustomAnimations(0, 0);
+                break;
+            case FADE_TYPE:
+                tran.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                break;
+            case BOTTOM_TO_TOP_TYPE:
+                tran.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up);
+                break;
+            case TOP_TO_BOTTOM_TYPE:
+                tran.setCustomAnimations(R.anim.slide_out_up,R.anim.slide_in_up);
+                break;
+            /*case RIGHT_TO_LEFT_TYPE:
+                activity.overridePendingTransition(R.anim.right_to_left_in, R.anim.right_to_left_out);
+                break;
+            case LEFT_TO_RIGHT_TYPE:
+                activity.overridePendingTransition(R.anim.left_to_right_in, R.anim.left_to_right_out);
+                break;
+            */
+
+        }
+        return tran;
+
+    }
+
+
 
     private boolean isSameFragmentAlreadyPlaced(Screen type) {
         Fragment existing = activity.getSupportFragmentManager().findFragmentById(R.id.content_frame);

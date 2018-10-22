@@ -50,7 +50,8 @@ public class ShoppingItemView implements ShoppingItemContract.View {
         Picasso.get()
                 .load(imageFile)
                 .placeholder(android.R.drawable.ic_menu_camera)
-                .fit().centerCrop()
+                .fit()
+                .centerCrop()
                 .into(itemImage);
     }
 
