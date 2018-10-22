@@ -54,8 +54,7 @@ public class ScreenNavigationBackManager {
         activity.hideKeyboard();
         if (activity.isTaskRoot()) {
             if (doubleBackToExitPressedOnce){
-                activity.finish();
-                activity.freeMemory();
+                exit();
             }else {
                 doubleBackToExitPressedOnce = true;
                 Snackbar.make(activity.findViewById(R.id.content_frame), R.string.back_message, Snackbar.LENGTH_LONG)
@@ -63,9 +62,13 @@ public class ScreenNavigationBackManager {
                 handler.postDelayed(() -> doubleBackToExitPressedOnce = false,TIME_OUT);
             }
         }else {
-            activity.finish();
-            activity.freeMemory();
+            exit();
         }
+    }
+
+    private void exit() {
+        activity.finish();
+        activity.freeMemory();
     }
 
     @Subscribe
