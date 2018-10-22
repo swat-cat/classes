@@ -41,7 +41,9 @@ import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
 import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
 import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
 import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationBackManager;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationManager;
+import com.swat_cat.firstapp.services.navigation.managers.events.BackPressEvent;
 import com.swat_cat.firstapp.shopping_list.shopping_item.LoadImageType;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -75,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private String photoPath = "";
     final RxPermissions rxPermissions = new RxPermissions(this);
     private Navigator navigator;
+    private ScreenNavigationBackManager navigationBackManager;
 
     @Override
     protected void onStart() {
@@ -110,7 +113,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         bus = new Bus();
         dialogShower = new DialogShower(this);
         navigator = new ScreenNavigationManager(this);
+        navigationBackManager = new ScreenNavigationBackManager(this);
         bus.register(dialogShower);
+        bus.register(navigationBackManager);
+    }
+
+    @Override
+    public void onBackPressed() {
+        bus.post(new BackPressEvent());
     }
 
 
@@ -202,6 +212,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         Log.i(TAG, " onDestroy()");
         bus.unregister(dialogShower);
+        bus.unregister(navigationBackManager);
         super.onDestroy();
     }
 

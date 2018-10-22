@@ -87,9 +87,4 @@ public class AuthActivity extends BaseActivity {
         super.onSaveInstanceState(outState);
         outState.putString("email",presenter.getEmail());
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

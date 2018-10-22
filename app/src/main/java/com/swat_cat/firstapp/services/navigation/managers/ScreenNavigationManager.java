@@ -90,10 +90,8 @@ public class ScreenNavigationManager implements Navigator {
 
     //Activities
     private void navigateToShopping(Bundle args) {
-        switchActivityScreen(Screen.SHOPPING,args,ScreenAnimType.FADE_TYPE,true);
+        switchActivityScreen(Screen.SHOPPING,args,ScreenAnimType.FADE_TYPE,false);
         activity.hideKeyboard();
-        activity.finish();
-        activity.freeMemory();
     }
 
     private void navigateToForgotPass(Bundle args) {
@@ -102,7 +100,7 @@ public class ScreenNavigationManager implements Navigator {
     }
 
     private void navigateToAuth(Bundle args) {
-        switchActivityScreen(Screen.AUTH,args,ScreenAnimType.FADE_TYPE,true);
+        switchActivityScreen(Screen.AUTH,args,ScreenAnimType.FADE_TYPE,false);
         activity.hideKeyboard();
         activity.finish();
         activity.freeMemory();
