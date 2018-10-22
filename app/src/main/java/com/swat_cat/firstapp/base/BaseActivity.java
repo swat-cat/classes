@@ -41,6 +41,7 @@ import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
 import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
 import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
 import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationBackManager;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationManager;
 import com.swat_cat.firstapp.services.navigation.managers.events.BackPressEvent;
@@ -77,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private String photoPath = "";
     final RxPermissions rxPermissions = new RxPermissions(this);
     private Navigator navigator;
-    private ScreenNavigationBackManager navigationBackManager;
+    private BackNavigator navigationBackManager;
 
     @Override
     protected void onStart() {
@@ -346,6 +347,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public Navigator getNavigator() {
         return navigator;
+    }
+
+    public void setNavigationBackManager(BackNavigator navigationBackManager) {
+        this.navigationBackManager = navigationBackManager;
     }
 }
 

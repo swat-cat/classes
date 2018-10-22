@@ -10,13 +10,14 @@ import android.view.View;
 import com.squareup.otto.Subscribe;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.services.navigation.managers.events.BackPressEvent;
 import com.swat_cat.firstapp.services.navigation.managers.events.TryExitActivityEvent;
 import com.swat_cat.firstapp.services.navigation.managers.events.TryNavigateBackEvent;
 
 import timber.log.Timber;
 
-public class ScreenNavigationBackManager {
+public class ScreenNavigationBackManager implements BackNavigator {
 
     private BaseActivity activity;
     private boolean couldNavigateBack = true;
@@ -37,7 +38,7 @@ public class ScreenNavigationBackManager {
         this.couldNavigateBack = couldNavigateBack;
     }
 
-    private void navigateBack(){
+    public void navigateBack(){
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             Timber.d("pop fragment from backstack");
@@ -50,7 +51,7 @@ public class ScreenNavigationBackManager {
         }
     }
 
-    private void tryExitActivity() {
+    public void tryExitActivity() {
         activity.hideKeyboard();
         if (activity.isTaskRoot()) {
             if (doubleBackToExitPressedOnce){
