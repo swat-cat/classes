@@ -349,8 +349,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         return navigator;
     }
 
-    public void setNavigationBackManager(BackNavigator navigationBackManager) {
-        this.navigationBackManager = navigationBackManager;
+    public BackNavigator getNavigationBackManager() {
+        return navigationBackManager;
     }
 }
 
