@@ -1,9 +1,6 @@
-package com.swat_cat.firstapp.shopping_list.shopping_item;
+package com.swat_cat.firstapp.screens.shopping_list.shopping_item;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +8,7 @@ import android.view.ViewGroup;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.base.BaseFragment;
-import com.swat_cat.firstapp.shopping_list.ShoppingListFragment;
+import com.swat_cat.firstapp.screens.shopping_list.ShoppingListFragment;
 
 public class ShoppingItemFragment extends BaseFragment {
 

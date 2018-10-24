@@ -1,6 +1,6 @@
-package com.swat_cat.firstapp.shopping_list;
+package com.swat_cat.firstapp.screens.shopping_list;
 
-import com.swat_cat.firstapp.list_example.ItemBoughtCallback;
+import com.swat_cat.firstapp.screens.list_example.ItemBoughtCallback;
 import com.swat_cat.firstapp.data.models.ShoppingItem;
 import com.swat_cat.firstapp.services.Navigator;
 

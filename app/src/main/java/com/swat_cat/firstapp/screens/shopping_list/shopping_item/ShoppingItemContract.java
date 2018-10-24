@@ -1,13 +1,10 @@
-package com.swat_cat.firstapp.shopping_list.shopping_item;
-
-import android.widget.ImageView;
+package com.swat_cat.firstapp.screens.shopping_list.shopping_item;
 
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
 import java.io.File;
 
 import io.reactivex.Observable;
-import io.reactivex.annotations.Nullable;
 
 public interface ShoppingItemContract {
     interface View{

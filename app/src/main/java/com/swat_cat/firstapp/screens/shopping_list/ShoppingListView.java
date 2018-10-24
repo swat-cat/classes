@@ -1,4 +1,4 @@
-package com.swat_cat.firstapp.shopping_list;
+package com.swat_cat.firstapp.screens.shopping_list;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,8 +7,8 @@ import android.view.View;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.swat_cat.firstapp.R;
-import com.swat_cat.firstapp.list_example.ItemBoughtCallback;
-import com.swat_cat.firstapp.list_example.ShoppingListAdapter;
+import com.swat_cat.firstapp.screens.list_example.ItemBoughtCallback;
+import com.swat_cat.firstapp.screens.list_example.ShoppingListAdapter;
 import com.swat_cat.firstapp.data.models.ShoppingItem;
 
 import java.util.List;

@@ -8,8 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
-import com.swat_cat.firstapp.list_example.ShoppingListAdapter;
-import com.swat_cat.firstapp.data.models.ShoppingItem;
+import com.swat_cat.firstapp.screens.list_example.ShoppingListAdapter;
 import com.swat_cat.firstapp.utils.Constants;
 
 /**

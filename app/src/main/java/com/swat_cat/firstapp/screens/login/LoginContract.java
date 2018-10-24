@@ -1,4 +1,4 @@
-package com.swat_cat.firstapp.login;
+package com.swat_cat.firstapp.screens.login;
 
 import com.swat_cat.firstapp.services.Navigator;
 
