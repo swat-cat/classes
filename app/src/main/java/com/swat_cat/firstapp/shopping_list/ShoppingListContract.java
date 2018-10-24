@@ -1,8 +1,7 @@
 package com.swat_cat.firstapp.shopping_list;
 
 import com.swat_cat.firstapp.list_example.ItemBoughtCallback;
-import com.swat_cat.firstapp.login.LoginContract;
-import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.data.models.ShoppingItem;
 import com.swat_cat.firstapp.services.Navigator;
 
 import java.util.List;
