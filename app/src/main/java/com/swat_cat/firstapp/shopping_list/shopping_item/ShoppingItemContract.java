@@ -28,6 +28,5 @@ public interface ShoppingItemContract {
         void start(View view);
         void stop();
         void saveItem();
-
     }
 }

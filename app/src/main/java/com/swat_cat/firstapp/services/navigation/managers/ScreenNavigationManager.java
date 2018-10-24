@@ -72,9 +72,16 @@ public class ScreenNavigationManager implements Navigator {
             case SHOPPING:
                 navigateToShopping(args);
                 break;
+            case MOVIE:
+                navigateToMovie(args);
 
 
         }
+    }
+
+    private void navigateToMovie(Bundle args) {
+        switchActivityScreen(Screen.MOVIE,args,ScreenAnimType.FADE_TYPE,false);
+        activity.hideKeyboard();
     }
 
     //Fragments

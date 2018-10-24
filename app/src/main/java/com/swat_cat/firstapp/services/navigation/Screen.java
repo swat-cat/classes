@@ -6,6 +6,7 @@ public enum Screen {
     AUTH,
     FORGOT_PASS,
     SHOPPING,
+    MOVIE,
     //Fragments
     SIGNIN,
     SIGNUP,

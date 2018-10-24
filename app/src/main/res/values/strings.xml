@@ -13,4 +13,6 @@
     <string name="error_selecting_file">Error selecting File</string>
     <string name="internal_storage">Internal storage</string>
     <string name="back_message">Please click BACK again to exit</string>
+    <string name="base_url" translatable="false">http://www.omdbapi.com/?apikey=33d3ea25</string>
+    <string name="search_movie">Search movie</string>
 </resources>
