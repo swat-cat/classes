@@ -1,14 +1,11 @@
 package com.swat_cat.firstapp.shopping_list.shopping_item;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.App;
 import com.swat_cat.firstapp.base.ImageEvent;
-import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.data.models.ShoppingItem;
 import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.utils.Constants;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;

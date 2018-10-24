@@ -2,11 +2,9 @@ package com.swat_cat.firstapp.shopping_list;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
-import com.swat_cat.firstapp.ForgotPasswordActivity;
 import com.swat_cat.firstapp.list_example.ItemBoughtCallback;
-import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.data.models.ShoppingItem;
 import com.swat_cat.firstapp.services.Navigator;
 import com.swat_cat.firstapp.services.navigation.Screen;
 import com.swat_cat.firstapp.services.navigation.ScreenType;

@@ -10,10 +10,9 @@ import android.view.View;
 
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.login.LoginContract;
-import com.swat_cat.firstapp.login.LoginNavigationCallback;
 import com.swat_cat.firstapp.login.LoginPresenter;
 import com.swat_cat.firstapp.login.LoginView;
-import com.swat_cat.firstapp.models.LoginData;
+import com.swat_cat.firstapp.data.models.LoginData;
 import com.swat_cat.firstapp.utils.Constants;
 
 public class AuthActivity extends BaseActivity {

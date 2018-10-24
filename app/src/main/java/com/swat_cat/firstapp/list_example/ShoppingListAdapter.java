@@ -1,8 +1,6 @@
 package com.swat_cat.firstapp.list_example;
 
 import android.graphics.Color;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.swat_cat.firstapp.R;
-import com.swat_cat.firstapp.models.ShoppingItem;
+import com.swat_cat.firstapp.data.models.ShoppingItem;
 
 import java.io.File;
 import java.util.List;

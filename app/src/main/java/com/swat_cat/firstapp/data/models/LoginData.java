@@ -1,4 +1,4 @@
-package com.swat_cat.firstapp.models;
+package com.swat_cat.firstapp.data.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
