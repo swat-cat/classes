@@ -54,9 +54,6 @@ public class ScreenNavigationManager implements Navigator {
             case ITEM_DETAILS:
                 navigateToItemDetails(args);
                 break;
-            case MOVIE_SEARCH:
-                navigateToMovieSearch(args);
-                break;
 
         }
     }
@@ -75,6 +72,9 @@ public class ScreenNavigationManager implements Navigator {
                 break;
             case SHOPPING:
                 navigateToShopping(args);
+                break;
+            case MOVIE_SEARCH:
+                navigateToMovieSearch(args);
                 break;
 
 

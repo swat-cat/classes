@@ -12,6 +12,7 @@ public interface MovieSearchContract {
         void setMovieList(List<SearchItemDTO> movies);
         void showLoading(boolean show);
         void showEmpty(boolean show);
+        void showList(boolean show);
     }
     interface Presenter{
         void start(View view);

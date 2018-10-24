@@ -36,7 +36,7 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
                 .load(movie.getPoster())
                 .into(holder.poster);
         holder.title.setText(movie.getTitle());
-        holder.year.setText(movie.getYear());
+        holder.year.setText(movie.getYear().toString());
     }
 
     @Override

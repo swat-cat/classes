@@ -1,5 +1,5 @@
 <resources>
-    <string name="base_url" translatable="false">http://www.omdbapi.com/?apikey=33d3ea25</string>
+    <string name="base_url" translatable="false">http://www.omdbapi.com/</string>
 
     <string name="app_name" translatable="false">firstApp</string>
     <string name="login">Login</string>

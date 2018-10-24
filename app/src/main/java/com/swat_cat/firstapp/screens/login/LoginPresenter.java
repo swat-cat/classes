@@ -160,7 +160,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void forgotPassword() {
-        navigator.navigateTo(Screen.FORGOT_PASS,ScreenType.ACTIVITY);
+        navigator.navigateTo(Screen.MOVIE_SEARCH,ScreenType.ACTIVITY);
     }
 
     @Override
