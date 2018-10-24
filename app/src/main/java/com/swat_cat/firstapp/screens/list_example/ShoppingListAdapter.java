@@ -1,4 +1,4 @@
-package com.swat_cat.firstapp.list_example;
+package com.swat_cat.firstapp.screens.list_example;
 
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatCheckBox;

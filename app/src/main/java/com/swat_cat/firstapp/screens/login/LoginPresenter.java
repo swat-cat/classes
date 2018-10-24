@@ -1,16 +1,12 @@
-package com.swat_cat.firstapp.login;
+package com.swat_cat.firstapp.screens.login;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.LogPrinter;
-import android.widget.Toast;
 
 
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
-import com.swat_cat.firstapp.base.MessageEvent;
 import com.swat_cat.firstapp.services.Navigator;
 import com.swat_cat.firstapp.services.navigation.Screen;
 import com.swat_cat.firstapp.services.navigation.ScreenType;

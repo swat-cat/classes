@@ -1,15 +1,12 @@
 package com.swat_cat.firstapp.base;
 
 import android.Manifest;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,48 +14,30 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.content.res.AppCompatResources;
-import android.support.v7.widget.ViewUtils;
-import android.text.Spanned;
 import android.util.Log;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.pavlospt.rxfile.RxFile;
 import com.squareup.otto.Bus;
-import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.dialogs.DialogShower;
 import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
-import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
-import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
 import com.swat_cat.firstapp.services.Navigator;
 import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationBackManager;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationManager;
 import com.swat_cat.firstapp.services.navigation.managers.events.BackPressEvent;
-import com.swat_cat.firstapp.shopping_list.shopping_item.LoadImageType;
+import com.swat_cat.firstapp.screens.shopping_list.shopping_item.LoadImageType;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import rx.Scheduler;
 import rx.Subscriber;
 import timber.log.Timber;
 

@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 
 import com.swat_cat.firstapp.base.App;
 import com.swat_cat.firstapp.services.navigation.Screen;
-import com.swat_cat.firstapp.shopping_list.ShoppingListFragment;
-import com.swat_cat.firstapp.shopping_list.shopping_item.ShoppingItemFragment;
+import com.swat_cat.firstapp.screens.shopping_list.ShoppingListFragment;
+import com.swat_cat.firstapp.screens.shopping_list.shopping_item.ShoppingItemFragment;
 
 public class ScreenFragmentFactory {
 
