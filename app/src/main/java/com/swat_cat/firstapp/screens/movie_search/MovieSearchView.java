@@ -56,4 +56,9 @@ public class MovieSearchView implements MovieSearchContract.View{
     public void showEmpty(boolean show) {
         empty.setVisibility(show?View.VISIBLE:View.GONE);
     }
+
+    @Override
+    public void showList(boolean show) {
+        searchResult.setVisibility(show?View.VISIBLE:View.GONE);
+    }
 }

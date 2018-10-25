@@ -9,6 +9,6 @@ import retrofit2.http.Query;
 
 public interface RestApi {
 
-    @GET
+    @GET("?apikey=33d3ea25")
     Observable<SearchResultDTO> search(@Query("type") String type, @Query("s")String s);
 }
