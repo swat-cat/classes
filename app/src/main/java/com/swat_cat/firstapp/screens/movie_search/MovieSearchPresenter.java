@@ -39,7 +39,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter{
 
             @Override
             public void onNext(CharSequence charSequence) {
-                String query= charSequence.toString().trim();
+                String query = charSequence.toString().trim();
                 view.showLoading(true);
                 repository.search(query)
                         .subscribe(new Observer<SearchResultDTO>() {
@@ -60,11 +60,12 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter{
                                 }else {
                                     view.showEmpty(false);
                                     view.setMovieList(list);
+                                    view.showList(true);
                                 }
+                            }else{
+                                view.showEmpty(true);
+                                view.showList(false);
                             }
-                        }else {
-                            view.showEmpty(true);
-                            view.showList(false);
                         }
                     }
 
