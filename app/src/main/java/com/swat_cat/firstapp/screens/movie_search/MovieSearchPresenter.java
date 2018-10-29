@@ -41,10 +41,15 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
                                 view.showLoading(true);
                             }
                         })
-                        .flatMap(new Function<CharSequence, ObservableSource<SearchResultDTO>>() {
+                        .map(new Function<CharSequence, String>() {
                             @Override
-                            public ObservableSource<SearchResultDTO> apply(CharSequence charSequence) throws Exception {
-                                String query= charSequence.toString().trim();
+                            public String apply(CharSequence charSequence) throws Exception {
+                                return charSequence.toString().trim();
+                            }
+                        })
+                        .flatMap(new Function<String, ObservableSource<SearchResultDTO>>() {
+                            @Override
+                            public ObservableSource<SearchResultDTO> apply(String query) throws Exception {
                                 return repository.search(query);
                             }
                         })
