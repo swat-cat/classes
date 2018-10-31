@@ -1,4 +1,4 @@
-package com.swat_cat.firstapp.login;
+package com.swat_cat.firstapp.screens.login;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -6,6 +6,10 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.LogPrinter;
 
+
+import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.Screen;
+import com.swat_cat.firstapp.services.navigation.ScreenType;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
@@ -21,8 +25,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     private LoginContract.View view;
     private CompositeDisposable subscriptions;
     private Handler handler;
-
-    private LoginNavigationCallback navigationCallback;
+    private Navigator navigator;
 
     @Override
     public void start(LoginContract.View view) {
@@ -89,7 +92,9 @@ public class LoginPresenter implements LoginContract.Presenter{
 
             @Override
             public void onNext(Object o) {
+                //view.resizeButtonAndChangeMarging();
                 login();
+                //view.showMessage("Piddor!!!");
             }
 
             @Override
@@ -155,25 +160,24 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void forgotPassword() {
-        navigationCallback.navigateToForgotPassword(null);
+        navigator.navigateTo(Screen.MOVIE_SEARCH,ScreenType.ACTIVITY);
     }
 
     @Override
     public void login() {
-        view.showLoading(true);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.showLoading(false);
-            }
-        },2000);
         Log.d(LoginPresenter.class.getSimpleName(),"Password: "+view.getPasswordText()+"\n"+"Login: "+view.getLoginText());
         Bundle args = new Bundle();
         args.putInt(USER_ID,64);
-        navigationCallback.navigateToFeed(args);
+        navigator.navigateTo(Screen.SHOPPING,ScreenType.ACTIVITY,args);
     }
 
-    public void setNavigationCallback(LoginNavigationCallback navigationCallback) {
-        this.navigationCallback = navigationCallback;
+    @Override
+    public String getEmail() {
+        return view.getLoginText();
+    }
+
+    @Override
+    public void setNavigator(Navigator navigator) {
+        this.navigator = navigator;
     }
 }

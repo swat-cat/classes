@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 
+import com.swat_cat.firstapp.screens.list_example.ShoppingListAdapter;
 import com.swat_cat.firstapp.utils.Constants;
 
 /**
@@ -16,13 +18,20 @@ import com.swat_cat.firstapp.utils.Constants;
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private Handler handler;
+    private RecyclerView shoppingList;
+    private ShoppingListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(this::finishScreen,5000);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //makeList();
     }
 
     private void finishScreen() {

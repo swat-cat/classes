@@ -2,16 +2,12 @@ package com.swat_cat.firstapp;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.swat_cat.firstapp.models.LoginData;
-import com.swat_cat.firstapp.models.Weather;
+import com.swat_cat.firstapp.data.models.LoginData;
+import com.swat_cat.firstapp.data.models.Weather;
 import com.swat_cat.firstapp.utils.Constants;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by max_ermakov on 9/29/18.

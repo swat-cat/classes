@@ -1,4 +1,6 @@
-package com.swat_cat.firstapp.login;
+package com.swat_cat.firstapp.screens.login;
+
+import com.swat_cat.firstapp.services.Navigator;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.Nullable;
@@ -18,6 +20,9 @@ public interface LoginContract {
         void setPasswordInputError(@Nullable String error);
         Observable<Object> confirmBtnAction();
         Observable<Object> forgotPasswordAction();
+        void resizeButtonAndChangeMarging();
+        void showMessage(String message);
+        void setLoginText(String text);
 
     }
     interface Presenter{
@@ -25,6 +30,7 @@ public interface LoginContract {
         void stop();
         void login();
         void forgotPassword();
-        void setNavigationCallback(LoginNavigationCallback navigationCallback);
+        void setNavigator(Navigator navigator);
+        String getEmail();
     }
 }
