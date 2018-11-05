@@ -13,6 +13,9 @@ public interface MovieSearchContract {
         void showLoading(boolean show);
         void showEmpty(boolean show);
         void showList(boolean show);
+        Observable<Object> menuAction();
+        void setMenuText(String text);
+        void showSearchField(boolean show);
     }
     interface Presenter{
         void start(View view);
