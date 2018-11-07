@@ -1,5 +1,6 @@
 package com.swat_cat.firstapp.screens.movie_search;
 
+import com.swat_cat.firstapp.data.models.Movie;
 import com.swat_cat.firstapp.data.repositories.MovieRepository;
 import com.swat_cat.firstapp.data.repositories.MovieNetworkRepositoryImpl;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
@@ -46,34 +47,30 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
                                 return charSequence.toString().trim();
                             }
                         })
-                        .flatMap(new Function<String, ObservableSource<SearchResultDTO>>() {
+                        .flatMap(new Function<String, ObservableSource<List<Movie>>>() {
                             @Override
-                            public ObservableSource<SearchResultDTO> apply(String query) throws Exception {
+                            public ObservableSource<List<Movie>> apply(String query) throws Exception {
                                 return repository.search(query);
                             }
                         })
                         .subscribe(
-                                new Consumer<SearchResultDTO>() {
+                                new Consumer<List<Movie>>() {
                                     @Override
-                                    public void accept(SearchResultDTO searchResultDTO) throws Exception {
+                                    public void accept(List<Movie> movies) throws Exception {
                                         view.showLoading(false);
-                                        if (searchResultDTO != null) {
-                                            List<SearchItemDTO> list = searchResultDTO.getSearch();
-                                            if (list != null && !list.isEmpty()) {
+                                            if (movies != null && !movies.isEmpty()) {
                                                 view.showEmpty(false);
-                                                view.setMovieList(list);
+                                                view.setMovieList(movies);
                                                 view.showList(true);
                                             } else {
                                                 view.showEmpty(true);
                                                 view.showList(false);
                                             }
 
-                                        } else {
-                                            view.showList(false);
-                                            view.showEmpty(true);
-
-                                        }
                                     }
+                                },
+                                e ->{
+                                    
                                 }
                         ));
         subscriptions.add(view.menuAction().subscribe(

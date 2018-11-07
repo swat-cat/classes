@@ -10,15 +10,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.data.models.Movie;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
 
 import java.util.List;
 
 public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    private List<SearchItemDTO> list;
+    private List<Movie> list;
 
-    public MovieAdapter(List<SearchItemDTO> list) {
+    public MovieAdapter(List<Movie> list) {
         this.list = list;
     }
 
@@ -31,7 +32,7 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SearchItemDTO movie = list.get(position);
+        Movie movie = list.get(position);
         Picasso.get()
                 .load(movie.getPoster())
                 .into(holder.poster);

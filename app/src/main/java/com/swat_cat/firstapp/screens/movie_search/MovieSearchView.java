@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.data.models.Movie;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
 
 import java.util.List;
@@ -98,7 +99,7 @@ public class MovieSearchView implements MovieSearchContract.View{
     }
 
     @Override
-    public void setMovieList(List<SearchItemDTO> movies) {
+    public void setMovieList(List<Movie> movies) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(root.getContext(), 2, GridLayoutManager.VERTICAL,false);
         adapter = new MovieAdapter(movies);
         searchResult.setLayoutManager(gridLayoutManager);

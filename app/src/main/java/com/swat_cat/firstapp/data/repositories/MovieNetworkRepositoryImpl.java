@@ -30,8 +30,10 @@ public class MovieNetworkRepositoryImpl implements MovieRepository{
                 .map(
                         it->{
                             List<Movie> movies = new ArrayList<>();
-                            for(SearchItemDTO itemDTO: it.getSearch()){
-                                movies.add(movieDtoMapper.from(itemDTO));
+                            if (it.getSearch()!=null) {
+                                for(SearchItemDTO itemDTO: it.getSearch()){
+                                    movies.add(movieDtoMapper.from(itemDTO));
+                                }
                             }
                             return movies;
                         }
