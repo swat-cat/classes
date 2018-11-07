@@ -99,9 +99,9 @@ public class MovieSearchView implements MovieSearchContract.View{
     }
 
     @Override
-    public void setMovieList(List<Movie> movies) {
+    public void setMovieList(List<Movie> movies, AddToFavouriteCallback callback) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(root.getContext(), 2, GridLayoutManager.VERTICAL,false);
-        adapter = new MovieAdapter(movies);
+        adapter = new MovieAdapter(movies,callback);
         searchResult.setLayoutManager(gridLayoutManager);
         searchResult.setAdapter(adapter);
     }

@@ -12,6 +12,9 @@ import com.swat_cat.firstapp.services.room_db.enteties.MovieEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -35,7 +38,7 @@ public class MovieLocalRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public Observable<List<Movie>> favourites() {
+    public Flowable<List<Movie>> favourites() {
         return movieDB.daoAccess().getFavorites()
                 .map(
                         it ->{
@@ -50,9 +53,10 @@ public class MovieLocalRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public Observable<Long> saveMovie(Movie movie) {
-        return movieDB.daoAccess().insertSingleMovie(movieEntetyMapper.to(movie))
-                .subscribeOn(Schedulers.io())
+    public Completable saveMovie(Movie movie) {
+        return Completable.fromAction(()->{
+           movieDB.daoAccess().insertwSingleMovie(movieEntetyMapper.to(movie));
+        }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }

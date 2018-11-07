@@ -10,6 +10,8 @@ import com.swat_cat.firstapp.services.rest.dto.SearchResultDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -43,12 +45,12 @@ public class MovieNetworkRepositoryImpl implements MovieRepository{
     }
 
     @Override
-    public Observable<List<Movie>> favourites() {
-        return Observable.just(new ArrayList<>());
+    public Flowable<List<Movie>> favourites() {
+        return Flowable.just(new ArrayList<>());
     }
 
     @Override
-    public Observable<Long> saveMovie(Movie movie) {
-        return Observable.just(0L);
+    public Completable saveMovie(Movie movie) {
+        return Completable.complete();
     }
 }

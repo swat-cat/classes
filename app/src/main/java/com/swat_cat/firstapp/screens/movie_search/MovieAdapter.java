@@ -18,9 +18,11 @@ import java.util.List;
 public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private List<Movie> list;
+    private AddToFavouriteCallback callback;
 
-    public MovieAdapter(List<Movie> list) {
+    public MovieAdapter(List<Movie> list, AddToFavouriteCallback callback) {
         this.list = list;
+        this.callback = callback;
     }
 
     @NonNull
@@ -38,6 +40,7 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
                 .into(holder.poster);
         holder.title.setText(movie.getTitle());
         holder.year.setText(movie.getYear().toString());
+        holder.itemView.setOnClickListener(v->callback.add(movie));
     }
 
     @Override

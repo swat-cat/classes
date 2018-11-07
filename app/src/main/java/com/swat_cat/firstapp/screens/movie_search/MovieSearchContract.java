@@ -1,5 +1,7 @@
 package com.swat_cat.firstapp.screens.movie_search;
 
+import android.view.View;
+
 import com.swat_cat.firstapp.data.models.Movie;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
 
@@ -10,7 +12,7 @@ import io.reactivex.Observable;
 public interface MovieSearchContract {
     interface View{
         Observable<CharSequence> searchChanged();
-        void setMovieList(List<Movie> movies);
+        void setMovieList(List<Movie> movies, AddToFavouriteCallback callback);
         void showLoading(boolean show);
         void showEmpty(boolean show);
         void showList(boolean show);
@@ -22,4 +24,8 @@ public interface MovieSearchContract {
         void start(View view);
         void stop();
     }
+}
+
+interface AddToFavouriteCallback{
+    void add(Movie movie);
 }
