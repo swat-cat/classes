@@ -10,4 +10,5 @@ public class Constants {
     public static final String LOGIN_DATA = "LOGIN_DATA";
     public static final String BROADCAST_STRING_ACTION = "com.swat_cat.string_action";
     public static final String ITEMS = "ITEMS";
+    public static final String MOVIE_ID = "MOVIE_ID";
 }

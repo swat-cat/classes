@@ -7,20 +7,31 @@ import com.swat_cat.firstapp.databinding.FragmentMovieDetailsBinding;
 import com.swat_cat.firstapp.screens.movie_details.MovieDetailsViewModel;
 import com.swat_cat.firstapp.services.mvvm.activities.BindingActivity;
 
+import static com.swat_cat.firstapp.utils.Constants.MOVIE_ID;
+
 public class MovieDetailsActivity extends BindingActivity<FragmentMovieDetailsBinding,MovieDetailsViewModel> {
+
+
+    MovieDetailsViewModel viewModel;
 
     @Override
     public MovieDetailsViewModel onCreate() {
-        return null;
+        String movieId = "";
+        Bundle args = getIntent().getExtras();
+        if(args!=null && args.containsKey(MOVIE_ID)){
+            movieId = args.getString(MOVIE_ID,"");
+        }
+       viewModel =  new MovieDetailsViewModel(this,movieId);
+       return viewModel;
     }
 
     @Override
     public int getVariable() {
-        return 0;
+        return BR.vm;
     }
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_movie_details;
     }
 }
