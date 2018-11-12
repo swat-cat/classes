@@ -39,7 +39,7 @@
         </activity>
         <activity android:name=".MovieSearchActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".TestActivity" >
+        <activity android:name=".MovieDetailsActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
