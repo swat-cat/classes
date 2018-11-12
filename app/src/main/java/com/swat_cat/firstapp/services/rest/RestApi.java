@@ -1,5 +1,6 @@
 package com.swat_cat.firstapp.services.rest;
 
+import com.swat_cat.firstapp.services.rest.dto.MovieDetailsDTO;
 import com.swat_cat.firstapp.services.rest.dto.SearchResultDTO;
 
 
@@ -11,4 +12,7 @@ public interface RestApi {
 
     @GET("?apikey=33d3ea25")
     Observable<SearchResultDTO> search(@Query("type") String type, @Query("s")String s);
+
+    @GET("?apikey=33d3ea25")
+    Observable<MovieDetailsDTO> movieDetails(@Query("i") String id);
 }

@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import com.swat_cat.firstapp.base.App;
 import com.swat_cat.firstapp.data.mappers.MovieEntetyMapper;
 import com.swat_cat.firstapp.data.models.Movie;
+import com.swat_cat.firstapp.data.models.MovieDetails;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
 import com.swat_cat.firstapp.services.room_db.MovieDB;
 import com.swat_cat.firstapp.services.room_db.enteties.MovieEntity;
@@ -35,6 +36,11 @@ public class MovieLocalRepositoryImpl implements MovieRepository {
     @Override
     public Observable<List<Movie>> search(String query) {
         return Observable.just(new ArrayList<>());
+    }
+
+    @Override
+    public Observable<MovieDetails> getMovieDetails(String id) {
+        return null;
     }
 
     @Override

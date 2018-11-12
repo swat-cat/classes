@@ -1,7 +1,9 @@
 package com.swat_cat.firstapp.data.repositories;
 
+import com.swat_cat.firstapp.data.mappers.MovieDetailsMapper;
 import com.swat_cat.firstapp.data.mappers.MovieDtoMapper;
 import com.swat_cat.firstapp.data.models.Movie;
+import com.swat_cat.firstapp.data.models.MovieDetails;
 import com.swat_cat.firstapp.services.rest.RestApi;
 import com.swat_cat.firstapp.services.rest.RestClient;
 import com.swat_cat.firstapp.services.rest.dto.SearchItemDTO;
@@ -20,10 +22,12 @@ public class MovieNetworkRepositoryImpl implements MovieRepository{
 
     private RestApi restApi;
     private MovieDtoMapper movieDtoMapper;
+    private MovieDetailsMapper movieDetailsMapper;
 
     public MovieNetworkRepositoryImpl() {
         restApi = RestClient.createApi();
         movieDtoMapper = new MovieDtoMapper();
+        movieDetailsMapper = new MovieDetailsMapper();
     }
 
     @Override
@@ -40,6 +44,14 @@ public class MovieNetworkRepositoryImpl implements MovieRepository{
                             return movies;
                         }
                 )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<MovieDetails> getMovieDetails(String id) {
+        return restApi.movieDetails(id)
+                .map(it-> movieDetailsMapper.from(it))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

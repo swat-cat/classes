@@ -8,6 +8,7 @@ import com.swat_cat.firstapp.data.repositories.MovieNetworkRepositoryImpl;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,6 +26,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
     private boolean isFavourite;
     private Disposable _search;
     private Disposable _favorites;
+    private List<Movie> movies;
 
     public MovieSearchPresenter() {
         subscriptions = new CompositeDisposable();
@@ -35,8 +37,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
         this.view = view;
         networkRepository = new MovieNetworkRepositoryImpl();
         localRepository = new MovieLocalRepositoryImpl();
-        showFavourites();
-        showSearch(view);
+        showSearch();
         subscriptions.add(view.menuAction().subscribe(
                 o->{
                     if (!isFavourite){
@@ -44,21 +45,25 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
                         view.setMenuText("Show Search");
                         //TODO fetch movies from db and set to recyclerview
                         isFavourite = true;
-                        _favorites.dispose();
-                        showSearch(view);
+                        if (_favorites!=null) {
+                            _favorites.dispose();
+                        }
+                        showFavourites();
                     }else {
                         view.showSearchField(true);
                         view.setMenuText("Show Favourites");
                         isFavourite = false;
-                         _search.dispose();
-                         showFavourites();
+                        if (_search!=null) {
+                            _search.dispose();
+                        }
+                        showSearch();
                     }
                 }
         ));
 
     }
 
-    private void showSearch(MovieSearchContract.View view) {
+    private void showSearch() {
         _search = view.searchChanged()
                 .debounce(400,TimeUnit.MILLISECONDS)
                 .skip(1)
@@ -90,12 +95,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
     }
 
     private void showFavourites() {
-        _favorites = localRepository.favourites().subscribe(
-                this::setMovieList,
-                e -> {
-                    Timber.e(e);
-                }
-        );
+
     }
 
     private void setMovieList(List<Movie> movies) {
@@ -111,7 +111,22 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
     }
 
     private void  addToFavourite(Movie m){
-        subscriptions.add(localRepository.saveMovie(m).subscribe());
+        localRepository.saveMovie(m).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                subscriptions.add(d);
+            }
+
+            @Override
+            public void onComplete() {
+                Timber.d("Saved");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     @Override
