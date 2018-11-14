@@ -104,13 +104,16 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
 
     private  boolean  valideateConfirmPassword(String confirmPassword, String password){
-        if(!confirmPassword.equals(password)){
-            view.setConfirmPasswordError("Passwords not match.");
-            return false;
-        }else {
-            view.setConfirmPasswordError(null);
-            return true;
+        if (state== AuthState.SIGNUP){
+            if(!confirmPassword.equals(password)){
+                view.setConfirmPasswordError("Passwords not match.");
+                return false;
+            }else {
+                view.setConfirmPasswordError(null);
+                return true;
+            }
         }
+        return true;
     }
 
     private void setupView() {
