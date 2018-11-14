@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "209010779189",
+    "firebase_url": "https://mainacadapp.firebaseio.com",
+    "project_id": "mainacadapp",
+    "storage_bucket": "mainacadapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209010779189:android:776ae6c86af3a584",
+        "android_client_info": {
+          "package_name": "com.swat_cat.firstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209010779189-5dgb32oj5apmr3a7proa7rklvojqfu32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swat_cat.firstapp",
+            "certificate_hash": "05168874c464f3ab1e5ed2961ee2cb43f85eef6d"
+          }
+        },
+        {
+          "client_id": "209010779189-53p0kp0uh0nqd0bfvs5d0d4vp4teq533.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAZ1YHWx_woKjQ632x5483VYEpBHTHaTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209010779189-53p0kp0uh0nqd0bfvs5d0d4vp4teq533.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
