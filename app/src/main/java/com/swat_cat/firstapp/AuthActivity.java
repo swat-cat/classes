@@ -33,7 +33,7 @@ public class AuthActivity extends BaseActivity {
 
         root = findViewById(R.id.root);
         view = new  LoginView(root);
-        presenter = new LoginPresenter();
+        presenter = new LoginPresenter(this);
         intentFilter = new IntentFilter();
         intentFilter.addAction(Constants.BROADCAST_STRING_ACTION);
     }

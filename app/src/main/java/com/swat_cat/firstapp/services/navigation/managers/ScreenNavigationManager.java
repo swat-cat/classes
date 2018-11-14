@@ -120,6 +120,8 @@ public class ScreenNavigationManager implements Navigator {
     private void navigateToMovieSearch(Bundle args) {
         switchActivityScreen(Screen.MOVIE_SEARCH,args,ScreenAnimType.FADE_TYPE,false);
         activity.hideKeyboard();
+        activity.finish();
+        activity.freeMemory();
     }
 
     private void switchActivityScreen(Screen type, Bundle bundle, ScreenAnimType animate, boolean clearStack) {

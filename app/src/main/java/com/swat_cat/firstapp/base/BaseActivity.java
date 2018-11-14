@@ -18,13 +18,18 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pavlospt.rxfile.RxFile;
 import com.squareup.otto.Bus;
+import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.dialogs.DialogShower;
 import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
+import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
+import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
 import com.swat_cat.firstapp.services.Navigator;
 import com.swat_cat.firstapp.services.navigation.BackNavigator;
 import com.swat_cat.firstapp.services.navigation.managers.ScreenNavigationBackManager;
@@ -101,6 +106,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         bus.post(new BackPressEvent());
+    }
+
+    public void showInfoDialog(String message){
+        View view = getLayoutInflater().inflate(R.layout.info_dialog, null);
+        TextView messageLabel = view.findViewById(R.id.message);
+        View okBtn = view.findViewById(R.id.ok);
+        messageLabel.setText(message);
+        okBtn.setOnClickListener(v -> getBus().post(new HideDialogEvent()));
+        bus.post(new ShowDialogEvent(view));
     }
 
 

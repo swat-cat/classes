@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.services.navigation.Screen;
 import com.swat_cat.firstapp.services.navigation.ScreenType;
@@ -20,6 +22,7 @@ import io.paperdb.Paper;
 
 public class WelcomeActivity extends BaseActivity {
 
+    private  FirebaseAuth auth;
 
     ImageView shoppingCart;
     @Override
@@ -27,7 +30,7 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         shoppingCart = (ImageView) findViewById(R.id.shopping_cart);
-
+        auth = FirebaseAuth.getInstance();
         ObjectAnimator scaleAnimX = ObjectAnimator.ofFloat(shoppingCart,"scaleX",0f, 1f);
         ObjectAnimator scaleAnimY = ObjectAnimator.ofFloat(shoppingCart,"scaleY",0f, 1f);
         AnimatorSet scaleSet = new AnimatorSet();
@@ -56,7 +59,12 @@ public class WelcomeActivity extends BaseActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getNavigator().navigateTo(Screen.AUTH,ScreenType.ACTIVITY);
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user == null){
+                            getNavigator().navigateTo(Screen.AUTH,ScreenType.ACTIVITY);
+                        }else {
+                            getNavigator().navigateTo(Screen.MOVIE_SEARCH, ScreenType.ACTIVITY);
+                        }
                     }
                 },1000);
             }

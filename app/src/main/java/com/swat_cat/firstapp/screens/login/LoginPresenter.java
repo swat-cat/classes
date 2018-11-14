@@ -7,6 +7,9 @@ import android.util.Log;
 import android.util.LogPrinter;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.services.Navigator;
 import com.swat_cat.firstapp.services.navigation.Screen;
 import com.swat_cat.firstapp.services.navigation.ScreenType;
@@ -28,10 +31,17 @@ public class LoginPresenter implements LoginContract.Presenter{
     private Handler handler;
     private Navigator navigator;
     private AuthState state = AuthState.SIGNIN;
+    private FirebaseAuth mAuth;
+    private BaseActivity activity;
+
+    public LoginPresenter(BaseActivity activity) {
+        this.activity = activity;
+    }
 
     @Override
     public void start(LoginContract.View view) {
         this.view =view;
+        mAuth = FirebaseAuth.getInstance();
         handler = new Handler(Looper.getMainLooper());
         setupView();
         setupActions();
@@ -46,9 +56,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
             @Override
             public void onNext(Object o) {
-                //view.resizeButtonAndChangeMarging();
                 login();
-                //view.showMessage("Piddor!!!");
             }
 
             @Override
@@ -126,6 +134,30 @@ public class LoginPresenter implements LoginContract.Presenter{
       if(!validateLogin(view.getLoginText()) | !validatePassword(view.getPasswordText()) |
               !valideateConfirmPassword(view.getConfirmPasswordText(), view.getPasswordText()))return;
         Timber.d("Passed");
+      if (state == AuthState.SIGNIN){
+          mAuth.signInWithEmailAndPassword(view.getLoginText(),view.getPasswordText())
+                  .addOnCompleteListener(task -> {
+                      if (task.isSuccessful()){
+                          navigateToHome();
+                      }
+                  }).addOnFailureListener(e -> {
+              activity.showInfoDialog(e.getMessage());
+          });
+
+      }else {
+          mAuth.createUserWithEmailAndPassword(view.getLoginText(),view.getPasswordText())
+                  .addOnCompleteListener(task ->{
+                        if (task.isSuccessful()){
+                            navigateToHome();
+                        }
+                  }).addOnFailureListener(e -> {
+              activity.showInfoDialog(e.getMessage());
+          });
+      }
+    }
+
+    private void navigateToHome() {
+        navigator.navigateTo(Screen.MOVIE_SEARCH, ScreenType.ACTIVITY);
     }
 
     @Override
