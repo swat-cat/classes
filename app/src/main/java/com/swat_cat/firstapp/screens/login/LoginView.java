@@ -27,9 +27,11 @@ public class LoginView implements LoginContract.View {
 
     private EditText loginInput;
     private EditText passwordInput;
+    private EditText confirmPassword;
     private View confirmBtn;
-    private View forgotPassword;
+    private TextView changeAuthState;
     private TextView testText;
+    private TextView confirmBtnText;
     public String email;
 
     private Bus bus;
@@ -45,8 +47,10 @@ public class LoginView implements LoginContract.View {
         loginInput = root.findViewById(R.id.login);
         passwordInput = root.findViewById(R.id.password);
         confirmBtn = root.findViewById(R.id.confirm_btn);
-        forgotPassword = root.findViewById(R.id.forgot_password);
+        changeAuthState = root.findViewById(R.id.change_auth_state);
+        confirmPassword = root.findViewById(R.id.confirm_password);
         testText = root.findViewById(R.id.test_text);
+        confirmBtnText = root.findViewById(R.id.confirm_btn_label);
         if (email!=null) {
             testText.setText(email);
         }
@@ -94,7 +98,22 @@ public class LoginView implements LoginContract.View {
 
     @Override
     public Observable<Object> forgotPasswordAction() {
-        return RxView.clicks(forgotPassword);
+        return RxView.clicks(changeAuthState);
+    }
+
+    @Override
+    public Observable<CharSequence> confirmPasswordChanged() {
+        return RxTextView.textChanges(confirmPassword);
+    }
+
+    @Override
+    public void setConfirmPasswordError(String error) {
+        confirmPassword.setError(error);
+    }
+
+    @Override
+    public String getConfirmPasswordText() {
+        return confirmPassword.getText().toString().trim();
     }
 
     @Override
@@ -129,5 +148,26 @@ public class LoginView implements LoginContract.View {
 
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+
+    @Override
+    public void changeAuthState(AuthState state) {
+        if(state == AuthState.SIGNIN){
+            showSignInView();
+        }else {
+            showSignUpView();
+        }
+    }
+
+    private void showSignUpView() {
+        confirmPassword.setVisibility(View.VISIBLE);
+        changeAuthState.setText(R.string.signup_message);
+        confirmBtnText.setText(R.string.sign_up);
+    }
+
+    private void showSignInView() {
+        confirmPassword.setVisibility(View.GONE);
+        changeAuthState.setText(R.string.signin_message);
+        confirmBtnText.setText(R.string.login);
     }
 }

@@ -61,6 +61,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login" />
 
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:visibility="gone"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+
         <FrameLayout
             android:id="@+id/confirm_btn"
             android:layout_width="0dp"
@@ -71,7 +88,7 @@
             android:background="@drawable/confirm_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password">
+            app:layout_constraintTop_toBottomOf="@id/confirm_password">
 
             <TextView
                 android:id="@+id/confirm_btn_label"
@@ -90,8 +107,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
-            android:id="@+id/forgot_password"
-            android:text="Forgot password?"
+            android:id="@+id/change_auth_state"
+            android:text="@string/signin_message"
             android:textSize="16sp"
             android:textColor="@drawable/text_click_selector"
             android:padding="4dp"/>

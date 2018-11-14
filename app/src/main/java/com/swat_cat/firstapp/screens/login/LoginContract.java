@@ -16,14 +16,17 @@ public interface LoginContract {
         String getLoginText();
         void setLoginInputError(@Nullable String error);
         Observable<CharSequence> passwordInputChanged();
+        Observable<CharSequence> confirmPasswordChanged();
         String getPasswordText();
         void setPasswordInputError(@Nullable String error);
+        void setConfirmPasswordError(@Nullable String error);
+        String getConfirmPasswordText();
         Observable<Object> confirmBtnAction();
         Observable<Object> forgotPasswordAction();
         void resizeButtonAndChangeMarging();
         void showMessage(String message);
         void setLoginText(String text);
-
+        void changeAuthState(AuthState state);
     }
     interface Presenter{
         void start(View view);
@@ -33,4 +36,9 @@ public interface LoginContract {
         void setNavigator(Navigator navigator);
         String getEmail();
     }
+}
+
+
+enum AuthState{
+    SIGNIN, SIGNUP
 }
