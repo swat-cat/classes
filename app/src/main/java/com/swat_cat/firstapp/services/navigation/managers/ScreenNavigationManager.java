@@ -98,7 +98,7 @@ public class ScreenNavigationManager implements Navigator {
 
     //Activities
     private void navigateToShopping(Bundle args) {
-        switchActivityScreen(Screen.SHOPPING,args,ScreenAnimType.FADE_TYPE,false);
+        switchActivityScreen(Screen.SHOPPING,args,ScreenAnimType.FADE_TYPE,true);
         activity.hideKeyboard();
     }
 

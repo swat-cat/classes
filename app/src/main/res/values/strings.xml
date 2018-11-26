@@ -22,4 +22,6 @@
     <string name="signup_message">Already have account? Sign in.</string>
     <string name="signin_message">Don\'t have account? Sign up.</string>
     <string name="sign_up">Create account</string>
+
+    <string name="shopping_list">Shopping List</string>
 </resources>

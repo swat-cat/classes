@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.base.BaseFragment;
+import com.swat_cat.firstapp.base.action_bar.ActionBarContract;
 
 /**
  * Created by max_ermakov on 10/3/18.
@@ -19,6 +20,7 @@ public class ShoppingListFragment extends BaseFragment {
     private ShoppingListContract.View view;
     private ShoppingListContract.Presenter presenter;
     private BaseActivity activity;
+    private ActionBarContract.Presenter actionBarPresenter;
 
     @Nullable
     @Override
@@ -27,12 +29,14 @@ public class ShoppingListFragment extends BaseFragment {
         activity = (BaseActivity)getActivity();
         view = new ShoppingListView(root);
         presenter = new ShoppingListPresenter();
+        actionBarPresenter = new ShoppingListActionBarPresenter(activity,activity.getActionBarView());
         return root;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        actionBarPresenter.start();
         presenter.setNavigator(activity.getNavigator());
         presenter.start(view);
     }
@@ -40,6 +44,7 @@ public class ShoppingListFragment extends BaseFragment {
     @Override
     public void onStop() {
         super.onStop();
+        actionBarPresenter.stop();
         presenter.stop();
     }
 }

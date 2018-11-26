@@ -27,5 +27,8 @@ public interface ActionBarContract {
         void setupActions();
         void leftButtonAction();
         void rightButtonAction();
+        void dispose();
+        void start();
+        void stop();
     }
 }
