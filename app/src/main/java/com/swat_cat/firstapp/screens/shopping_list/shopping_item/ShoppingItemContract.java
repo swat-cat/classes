@@ -17,8 +17,7 @@ public interface ShoppingItemContract {
         void setSaveButtonEnabled(boolean enabled);
         Observable<Object> saveBtnAction();
         void showImageChoiceModal(boolean show, ImagePickChoiceView.ImagePickViewCallback callback);
-        Observable<Object> backAction();
-
+        void showInfo();
     }
     interface Presenter{
         void setLoadImageCallback(LoadImageCallback loadImageCallback);

@@ -23,8 +23,8 @@ public class ShoppingItemFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_shopping_item,container,false);
         activity = ((BaseActivity) getActivity());
-        actionBarPresenter = new GeneralBackActionBarPresenter(activity, activity.getActionBarView(), R.string.create_item);
-        view = new ShoppingItemView(root);
+        actionBarPresenter = new ShoppingItemActionBarPresenter(activity, activity.getActionBarView(), R.string.create_item);
+        view = new ShoppingItemView(root, activity);
         presenter = new ShoppingItemPresenter(activity.getNavigationBackManager());
         activity.getBus().register(presenter);
         return root;

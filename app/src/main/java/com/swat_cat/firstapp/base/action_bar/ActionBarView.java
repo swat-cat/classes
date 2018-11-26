@@ -42,7 +42,7 @@ public class ActionBarView implements ActionBarContract.View {
 
     @Override
     public void showLeftButton(boolean show) {
-        leftContainer.setVisibility(show?View.VISIBLE:View.GONE);
+        leftContainer.setVisibility(show?View.VISIBLE:View.INVISIBLE);
         leftContainer.setEnabled(show);
     }
 
@@ -53,7 +53,7 @@ public class ActionBarView implements ActionBarContract.View {
 
     @Override
     public void showRightButton(boolean show) {
-        rightContainer.setVisibility(show?View.VISIBLE:View.GONE);
+        rightContainer.setVisibility(show?View.VISIBLE:View.INVISIBLE);
         rightContainer.setEnabled(show);
     }
 

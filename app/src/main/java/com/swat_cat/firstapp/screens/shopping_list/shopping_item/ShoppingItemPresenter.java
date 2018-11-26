@@ -1,5 +1,7 @@
 package com.swat_cat.firstapp.screens.shopping_list.shopping_item;
 
+import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
@@ -18,6 +20,7 @@ import io.paperdb.Paper;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
@@ -200,6 +203,11 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
     public void onEvent(ImageEvent event){
         itemFile = event.file;
         view.setItemImage(itemFile);
+    }
+
+    @Subscribe
+    public void onEvent(InfoUserActionEvent event){
+        view.showInfo();
     }
 }
 

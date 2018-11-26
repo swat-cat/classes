@@ -9,6 +9,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.squareup.picasso.Picasso;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.base.BaseActivity;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
 import java.io.File;
@@ -18,6 +19,7 @@ import io.reactivex.Observable;
 public class ShoppingItemView implements ShoppingItemContract.View {
 
     private View root;
+    private BaseActivity activity;
 
     private ImageView itemImage;
     private EditText titleInput;
@@ -25,8 +27,9 @@ public class ShoppingItemView implements ShoppingItemContract.View {
     private View saveBtn;
     private FrameLayout modalFrame;
 
-    ShoppingItemView(View root){
+    ShoppingItemView(View root, BaseActivity activity){
         this.root = root;
+        this.activity = activity;
         initView();
     }
 
@@ -104,7 +107,7 @@ public class ShoppingItemView implements ShoppingItemContract.View {
     }
 
     @Override
-    public Observable<Object> backAction() {
-        return null;
+    public void showInfo() {
+        activity.showInfoDialog("Info from Shopping Item screen");
     }
 }

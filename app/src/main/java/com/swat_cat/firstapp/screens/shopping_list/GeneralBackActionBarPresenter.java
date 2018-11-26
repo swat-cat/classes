@@ -13,8 +13,8 @@ import io.reactivex.disposables.Disposable;
 
 public class GeneralBackActionBarPresenter implements ActionBarContract.Presenter {
 
-    private BaseActivity activity;
-    private ActionBarContract.View view;
+    public BaseActivity activity;
+    public ActionBarContract.View view;
     private CompositeDisposable disposable;
     private int titleRes;
 
@@ -27,6 +27,7 @@ public class GeneralBackActionBarPresenter implements ActionBarContract.Presente
 
     @Override
     public void setupView() {
+        view.showRightButton(false);
         View leftIcon  = activity.getLayoutInflater().inflate(R.layout.ab_back,null);
         view.setupLeftButton(leftIcon);
         view.setupCenterText(titleRes);
@@ -36,6 +37,9 @@ public class GeneralBackActionBarPresenter implements ActionBarContract.Presente
     public void setupActions() {
         view.leftButtonAction().subscribe(
                 o -> leftButtonAction()
+        );
+        view.rightButtonAction().subscribe(
+                o -> rightButtonAction()
         );
     }
 
