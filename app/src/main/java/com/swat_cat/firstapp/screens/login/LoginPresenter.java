@@ -160,7 +160,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
 
     private void navigateToHome() {
-        navigator.navigateTo(Screen.MOVIE_SEARCH, ScreenType.ACTIVITY);
+        navigator.navigateTo(Screen.SHOPPING, ScreenType.ACTIVITY);
     }
 
     @Override

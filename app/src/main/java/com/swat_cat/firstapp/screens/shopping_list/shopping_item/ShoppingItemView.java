@@ -24,7 +24,6 @@ public class ShoppingItemView implements ShoppingItemContract.View {
     private EditText descriptionInput;
     private View saveBtn;
     private FrameLayout modalFrame;
-    private View backBtn;
 
     ShoppingItemView(View root){
         this.root = root;
@@ -38,7 +37,6 @@ public class ShoppingItemView implements ShoppingItemContract.View {
         descriptionInput = root.findViewById(R.id.subtitle);
         saveBtn = root.findViewById(R.id.save_btn);
         modalFrame = root.findViewById(R.id.modal_frame);
-        backBtn = root.findViewById(R.id.back_btn);
     }
 
 
@@ -107,6 +105,6 @@ public class ShoppingItemView implements ShoppingItemContract.View {
 
     @Override
     public Observable<Object> backAction() {
-        return RxView.clicks(backBtn);
+        return null;
     }
 }

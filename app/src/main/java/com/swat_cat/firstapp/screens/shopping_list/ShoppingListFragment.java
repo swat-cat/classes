@@ -46,5 +46,6 @@ public class ShoppingListFragment extends BaseFragment {
         super.onStop();
         actionBarPresenter.stop();
         presenter.stop();
+        presenter = null;
     }
 }

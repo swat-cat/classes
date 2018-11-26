@@ -130,27 +130,6 @@ public class ShoppingItemPresenter implements ShoppingItemContract.Presenter {
 
             }
         });
-        view.backAction().subscribe(new Observer<Object>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                subscriptions.add(d);
-            }
-
-            @Override
-            public void onNext(Object o) {
-                backNavigator.navigateBack();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
     }
 
     private void requestImageChoice() {

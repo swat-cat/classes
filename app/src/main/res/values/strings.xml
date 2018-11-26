@@ -24,4 +24,5 @@
     <string name="sign_up">Create account</string>
 
     <string name="shopping_list">Shopping List</string>
+    <string name="create_item">Create Item</string>
 </resources>
