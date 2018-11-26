@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.base.action_bar.ActionBarContract;
 import com.swat_cat.firstapp.screens.login.LoginContract;
 import com.swat_cat.firstapp.screens.login.LoginPresenter;
 import com.swat_cat.firstapp.screens.login.LoginView;
@@ -85,5 +86,10 @@ public class AuthActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("email",presenter.getEmail());
+    }
+
+    @Override
+    public ActionBarContract.View getActionBarView() {
+        return null;
     }
 }

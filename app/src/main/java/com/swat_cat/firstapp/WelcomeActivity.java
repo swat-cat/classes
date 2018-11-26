@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.base.action_bar.ActionBarContract;
 import com.swat_cat.firstapp.services.navigation.Screen;
 import com.swat_cat.firstapp.services.navigation.ScreenType;
 
@@ -63,12 +64,17 @@ public class WelcomeActivity extends BaseActivity {
                         if (user == null){
                             getNavigator().navigateTo(Screen.AUTH,ScreenType.ACTIVITY);
                         }else {
-                            getNavigator().navigateTo(Screen.MOVIE_SEARCH, ScreenType.ACTIVITY);
+                            getNavigator().navigateTo(Screen.SHOPPING, ScreenType.ACTIVITY);
                         }
                     }
                 },1000);
             }
         });
         set.start();
+    }
+
+    @Override
+    public ActionBarContract.View getActionBarView() {
+        return null;
     }
 }

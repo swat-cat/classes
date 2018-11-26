@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.pavlospt.rxfile.RxFile;
 import com.squareup.otto.Bus;
 import com.swat_cat.firstapp.R;
+import com.swat_cat.firstapp.base.action_bar.ActionBarContract;
 import com.swat_cat.firstapp.base.dialogs.DialogShower;
 import com.swat_cat.firstapp.base.dialogs.events.DialogWasDissmisedEvent;
 import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
@@ -74,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         imageSubs = new CompositeDisposable();
     }
 
-
+    public abstract ActionBarContract.View getActionBarView();
 
     @Override
     protected void onStop() {

@@ -3,6 +3,7 @@ package com.swat_cat.firstapp;
 import android.os.Bundle;
 
 import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.base.action_bar.ActionBarContract;
 import com.swat_cat.firstapp.screens.movie_search.MovieSearchContract;
 import com.swat_cat.firstapp.screens.movie_search.MovieSearchPresenter;
 import com.swat_cat.firstapp.screens.movie_search.MovieSearchView;
@@ -18,6 +19,11 @@ public class MovieSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_movie_search);
         view = new MovieSearchView(findViewById(R.id.content_frame));
         presenter = new MovieSearchPresenter(this.getNavigator());
+    }
+
+    @Override
+    public ActionBarContract.View getActionBarView() {
+        return null;
     }
 
     @Override
