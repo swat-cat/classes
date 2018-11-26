@@ -11,15 +11,17 @@ import com.swat_cat.firstapp.services.navigation.managers.events.BackPressEvent;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class ShoppingListActionBarPresenter implements ActionBarContract.Presenter {
+public class GeneralBackActionBarPresenter implements ActionBarContract.Presenter {
 
     private BaseActivity activity;
     private ActionBarContract.View view;
     private CompositeDisposable disposable;
+    private int titleRes;
 
-    public ShoppingListActionBarPresenter(BaseActivity activity, ActionBarContract.View view) {
+    public GeneralBackActionBarPresenter(BaseActivity activity, ActionBarContract.View view, int titleRes) {
         this.activity = activity;
         this.view = view;
+        this.titleRes = titleRes;
         disposable = new CompositeDisposable();
     }
 
@@ -27,7 +29,7 @@ public class ShoppingListActionBarPresenter implements ActionBarContract.Present
     public void setupView() {
         View leftIcon  = activity.getLayoutInflater().inflate(R.layout.ab_back,null);
         view.setupLeftButton(leftIcon);
-        view.setupCenterText(R.string.shopping_list);
+        view.setupCenterText(titleRes);
     }
 
     @Override

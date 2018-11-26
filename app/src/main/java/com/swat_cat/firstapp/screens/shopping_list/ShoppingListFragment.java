@@ -29,7 +29,7 @@ public class ShoppingListFragment extends BaseFragment {
         activity = (BaseActivity)getActivity();
         view = new ShoppingListView(root);
         presenter = new ShoppingListPresenter();
-        actionBarPresenter = new ShoppingListActionBarPresenter(activity,activity.getActionBarView());
+        actionBarPresenter = new GeneralBackActionBarPresenter(activity,activity.getActionBarView(), R.string.shopping_list);
         return root;
     }
 
