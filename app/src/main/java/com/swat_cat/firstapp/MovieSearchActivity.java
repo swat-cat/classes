@@ -17,7 +17,7 @@ public class MovieSearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_search);
         view = new MovieSearchView(findViewById(R.id.content_frame));
-        presenter = new MovieSearchPresenter();
+        presenter = new MovieSearchPresenter(this.getNavigator());
     }
 
     @Override

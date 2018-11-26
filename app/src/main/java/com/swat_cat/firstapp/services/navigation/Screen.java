@@ -15,5 +15,6 @@ public enum Screen {
 
     SHOPPING_LIST,
     ITEM_DETAILS,
-    MOVIE_SEARCH
+    MOVIE_SEARCH,
+    MOVIE_DETAILS
 }

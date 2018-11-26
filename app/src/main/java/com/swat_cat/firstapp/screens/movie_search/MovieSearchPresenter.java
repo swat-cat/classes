@@ -1,9 +1,15 @@
 package com.swat_cat.firstapp.screens.movie_search;
 
+import android.os.Bundle;
+
 import com.swat_cat.firstapp.data.models.Movie;
 import com.swat_cat.firstapp.data.repositories.MovieLocalRepositoryImpl;
 import com.swat_cat.firstapp.data.repositories.MovieRepository;
 import com.swat_cat.firstapp.data.repositories.MovieNetworkRepositoryImpl;
+import com.swat_cat.firstapp.services.Navigator;
+import com.swat_cat.firstapp.services.navigation.Screen;
+import com.swat_cat.firstapp.services.navigation.ScreenType;
+import com.swat_cat.firstapp.utils.Constants;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +33,12 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
     private Disposable _search;
     private Disposable _favorites;
     private List<Movie> movies;
+    private Navigator navigator;
 
-    public MovieSearchPresenter() {
-        subscriptions = new CompositeDisposable();
+    public MovieSearchPresenter(
+            Navigator navigator
+    ) {
+        this.navigator = navigator;
     }
 
     @Override
@@ -38,6 +47,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
         networkRepository = new MovieNetworkRepositoryImpl();
         localRepository = new MovieLocalRepositoryImpl();
         showSearch();
+        subscriptions = new CompositeDisposable();
         subscriptions.add(view.menuAction().subscribe(
                 o->{
                     if (!isFavourite){
@@ -111,7 +121,7 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
     }
 
     private void  addToFavourite(Movie m){
-        localRepository.saveMovie(m).subscribe(new CompletableObserver() {
+        /*localRepository.saveMovie(m).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(Disposable d) {
                 subscriptions.add(d);
@@ -126,7 +136,10 @@ public class MovieSearchPresenter implements MovieSearchContract.Presenter {
             public void onError(Throwable e) {
 
             }
-        });
+        });*/
+        Bundle args = new Bundle();
+        args.putString(Constants.MOVIE_ID,m.getImdbID());
+        navigator.navigateTo(Screen.MOVIE_DETAILS,ScreenType.ACTIVITY,args);
     }
 
     @Override

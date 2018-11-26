@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.swat_cat.firstapp.ForgotPasswordActivity;
 import com.swat_cat.firstapp.AuthActivity;
+import com.swat_cat.firstapp.MovieDetailsActivity;
 import com.swat_cat.firstapp.MovieSearchActivity;
 import com.swat_cat.firstapp.ShoppingListActivity;
 import com.swat_cat.firstapp.WelcomeActivity;
@@ -29,7 +30,8 @@ public class ScreenActivityFactory {
                 return ForgotPasswordActivity.class;
             case MOVIE_SEARCH:
                 return MovieSearchActivity.class;
-
+            case MOVIE_DETAILS:
+                return MovieDetailsActivity.class;
                 default:return WelcomeActivity.class;
         }
     }

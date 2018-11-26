@@ -85,20 +85,24 @@ public class MovieDetails {
     }
 
     public void transformRaitingToDouble(String rawRaiting){
-        if (rawRaiting!=null && !rawRaiting.isEmpty()){
+        if (rawRaiting!=null && rawRaiting.matches("\\d+")){
+            raiting = Double.valueOf(rawRaiting);
+            return;
+        }
+        else if (rawRaiting!=null && !rawRaiting.isEmpty()){
             if (rawRaiting.contains("%")){
                 String percent = rawRaiting.replace("%","");
                 int p = Integer.valueOf(percent);
                 raiting = p/100.0;
             }else if(rawRaiting.contains("/")){
                 String[]values = rawRaiting.split("/");
-                List<Integer> intVal = new ArrayList<>();
+                List<Double> intVal = new ArrayList<>();
                 for (String v: values){
                     v = v.trim();
-                    intVal.add(Integer.valueOf(v));
+                    intVal.add(Double.valueOf(v));
                 }
                 if (intVal.size() == 2){
-                    raiting = Double.valueOf(intVal.get(0))/Double.valueOf(intVal.get(1));
+                    raiting =intVal.get(0)/intVal.get(1);
                 }
             }
         }

@@ -76,10 +76,14 @@ public class ScreenNavigationManager implements Navigator {
             case MOVIE_SEARCH:
                 navigateToMovieSearch(args);
                 break;
+            case MOVIE_DETAILS:
+                navigateToMovieDetails(args);
+                break;
 
 
         }
     }
+
 
     //Fragments
     private void navigateToItemDetails(Bundle args) {
@@ -122,6 +126,12 @@ public class ScreenNavigationManager implements Navigator {
         activity.hideKeyboard();
         activity.finish();
         activity.freeMemory();
+    }
+
+
+    private void navigateToMovieDetails(Bundle args) {
+        switchActivityScreen(Screen.MOVIE_DETAILS,args,ScreenAnimType.FADE_TYPE,false);
+        activity.hideKeyboard();
     }
 
     private void switchActivityScreen(Screen type, Bundle bundle, ScreenAnimType animate, boolean clearStack) {

@@ -60,6 +60,6 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
-    compile project(':huy_znaet_zachem_libray')
+    implementation 'com.xiaofeng.android:flowlayoutmanager:1.2.3.2'
 }
 apply plugin: 'com.google.gms.google-services'
