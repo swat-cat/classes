@@ -1,5 +1,8 @@
 package com.swat_cat.firstapp.screens.shopping_list.shopping_item;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -10,9 +13,13 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.squareup.picasso.Picasso;
 import com.swat_cat.firstapp.R;
 import com.swat_cat.firstapp.base.BaseActivity;
+import com.swat_cat.firstapp.base.dialogs.events.HideDialogEvent;
+import com.swat_cat.firstapp.base.dialogs.events.ShowDialogEvent;
+import com.swat_cat.firstapp.data.models.ContactWrapper;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
 import java.io.File;
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -109,5 +116,25 @@ public class ShoppingItemView implements ShoppingItemContract.View {
     @Override
     public void showInfo() {
         activity.showInfoDialog("Info from Shopping Item screen");
+    }
+
+    @Override
+    public void showContactModal(List<ContactWrapper> contacts, Runnable runnable) {
+
+        View modalView = LayoutInflater.from(root.getContext()).inflate(R.layout.contact_modal_layout,null);
+
+        View sendButton = modalView.findViewById(R.id.send_button);
+        RecyclerView recyclerView = modalView.findViewById(R.id.recycler_view);
+
+        sendButton.setOnClickListener(r -> {
+            runnable.run();
+            activity.getBus().post(new HideDialogEvent());
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new ContactsAdapter(contacts));
+        activity.getBus().post(new ShowDialogEvent(modalView));
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

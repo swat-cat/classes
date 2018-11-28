@@ -1,8 +1,10 @@
 package com.swat_cat.firstapp.screens.shopping_list.shopping_item;
 
+import com.swat_cat.firstapp.data.models.ContactWrapper;
 import com.swat_cat.firstapp.utils.ImagePickChoiceView;
 
 import java.io.File;
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -18,6 +20,7 @@ public interface ShoppingItemContract {
         Observable<Object> saveBtnAction();
         void showImageChoiceModal(boolean show, ImagePickChoiceView.ImagePickViewCallback callback);
         void showInfo();
+        void showContactModal(List<ContactWrapper> contacts, Runnable runnable);
     }
     interface Presenter{
         void setLoadImageCallback(LoadImageCallback loadImageCallback);

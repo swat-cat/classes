@@ -25,4 +25,5 @@
 
     <string name="shopping_list">Shopping List</string>
     <string name="create_item">Create Item</string>
+    <string name="send">Send</string>
 </resources>
